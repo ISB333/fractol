@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:52:57 by adesille          #+#    #+#             */
-/*   Updated: 2023/12/07 17:27:58 by adesille         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:58:09 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,12 @@ int	render(t_data *data)
 	return (0);
 }
 
+int	destroy_windows(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	exit(1);
+}
+
 int main(void)
 {
 	t_data	data;
@@ -108,6 +114,7 @@ int main(void)
 	/* Setup Hooks */
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+	mlx_hook(data.win_ptr, 17, 0, destroy_windows, &data);
 
 	mlx_loop(data.mlx_ptr); // loop that let the graphic server works
 
