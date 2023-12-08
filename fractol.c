@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:52:57 by adesille          #+#    #+#             */
-/*   Updated: 2023/12/07 19:02:45 by adesille         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:19:19 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <mlx.h>
 #include <X11/keysym.h>
@@ -49,6 +50,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
+	int		cur_img;
 }		t_data;
 
 typedef struct s_rect
@@ -59,13 +61,6 @@ typedef struct s_rect
 	int	height;
 	int	color;
 }		t_rect;
-
-int	handle_input(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	return (0);
-}
 
 int	handle_keypress(int keysym, t_data *data)
 {
@@ -160,14 +155,17 @@ int main(void)
 		return(free(data.win_ptr), 1);
 	
 	/* Setup Hooks */
+	data.img.mlx_img = mlx_new_image(data.mlx_ptr, W_WIDTH, W_HEIGHT);
+	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
+
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_hook(data.win_ptr, 17, 0, destroy_windows, &data);
 
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, W_WIDTH, W_HEIGHT);
 	mlx_loop(data.mlx_ptr); // loop that let the graphic server works
 
     /* we will exit the loop if there's no window left, and execute this code */
+	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 }
