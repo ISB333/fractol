@@ -6,7 +6,7 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/04/13 11:47:22 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/15 09:21:43 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJDIR = 0_obj
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 GREEN = \033[0;92m
-CURRENT_DATE	:= $(shell date +"%Y-%m-%d %H:%M:%S")
+CURRENT_DATE	:= $(shell date +"%Y-%m-%d %H:%M")
 
 ######################## LIBRARY ########################
 
