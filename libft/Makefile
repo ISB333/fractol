@@ -6,7 +6,7 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 09:53:02 by adesille          #+#    #+#              #
-#    Updated: 2023/11/08 12:23:08 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/15 13:44:37 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 		ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-OBJS = 	${SRCS:.c=.o} 
-OBJS_BONUS = ${BONUS:.c=.o}
+OBJS = 	$(SRCS:.c=.o) 
+OBJS_BONUS = $(BONUS:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -36,22 +36,22 @@ RM = rm -f
 
 NAME = libft.a
 
-all :	${NAME}
+all :	$(NAME)
 
-${NAME}:	${OBJS}
-		ar rcs ${NAME} ${OBJS}
+$(NAME):	$(OBJS)
+		ar rcs $(NAME) $(OBJS)
 
-bonus : ${OBJS_BONUS}
+bonus : $(OBJS_BONUS)
 		ar rcs $(NAME) $(OBJS_BONUS)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-		${RM} ${OBJS} $(OBJS_BONUS)
+		$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
-		${RM} ${NAME}
+		$(RM) $(NAME)
 
 re :	fclean all
 	

@@ -6,48 +6,55 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/04/15 09:21:43 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/15 14:17:06 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################## ARGUMENTS ########################
 
 NAME = fractol
-CFLAGS += -Wall -Wextra -Werror -I.
+HEADERS = -I./include -I$(LIBMLX)/include
+CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast
 CC = cc
 
 ######################## SOURCES ########################
 
-SRCS = main.c
-OBJDIR = 0_obj
-OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
+LIBMLX := ./MLX42
+LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCS := main.c
+
+OBJDIR := 0_obj
+OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
 
 GREEN = \033[0;92m
-CURRENT_DATE	:= $(shell date +"%Y-%m-%d %H:%M")
+CURRENT_DATE := $(shell date +"%Y-%m-%d %H:%M")
 
 ######################## LIBRARY ########################
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX = ./MLX42/build/libmlx42.a
 
 ######################## RULES ########################
 
-all: $(NAME)
+all: libmlx $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@echo "Compiling $<..."
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS)  -c $< -o $@ $(HEADERS)
+
+$(NAME): $(OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
 	rm -rf $(OBJDIR)
+	rm -rf $(LIBMLX)/build
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
@@ -61,4 +68,4 @@ git:
 	@git push > /dev/null 2>&1
 	@echo "$(GREEN)┌(メ▼▼)┘ GIT UPDATE └(▼▼メ)┐ $(DEF_COLOR)"
 
-.PHONY: all clean fclean re git
+.PHONY: all clean fclean re git libmlx
