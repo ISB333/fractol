@@ -6,7 +6,7 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/04/15 14:17:06 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/16 11:09:32 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 
 NAME = fractol
 HEADERS = -I./include -I$(LIBMLX)/include
-CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast
+DEPFLAGS = -MP -MD
+CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast $(DEPFLAGS)
 CC = cc
 
 ######################## SOURCES ########################
@@ -25,6 +26,7 @@ SRCS := main.c
 
 OBJDIR := 0_obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
+DEPFILES := $(SRCS:%.c=$(OBJDIR)/%.d)
 
 GREEN = \033[0;92m
 CURRENT_DATE := $(shell date +"%Y-%m-%d %H:%M")
@@ -67,5 +69,7 @@ git:
 	@git commit -m "$(CURRENT_DATE)" > /dev/null 2>&1
 	@git push > /dev/null 2>&1
 	@echo "$(GREEN)┌(メ▼▼)┘ GIT UPDATE └(▼▼メ)┐ $(DEF_COLOR)"
+
+-include $(DEPFILES)
 
 .PHONY: all clean fclean re git libmlx

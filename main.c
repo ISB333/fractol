@@ -6,39 +6,77 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 11:09:55 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/15 14:40:07 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:10:07 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_error(void)
+int	error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
+	return (exit(EXIT_FAILURE), 1);
 }
 
-void	ft_hook(void *param)
+int32_t	pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
-	const mlx_t* mlx = param;
+	return (r << 24 | g << 16 | b << 8 | a);
+}
 
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+void	randomize(void *param)
+{
+	(void)param;
+	uint32_t	i;
+	uint32_t	y;
+	uint32_t	color;
+
+	i = -1;
+	y = -1;
+	while (++i < image->width)
+		while (++y < image->height)
+		{
+			color = pixel(
+				rand() % 0XFF, // R
+				rand() % 0XFF, // G
+				rand() % 0XFF, // B
+				rand() % 0xFF  // A
+			);
+			mlx_put_pixel(image, i, y, color);
+		}
+}
+
+void	hook(void *param)
+{
+	mlx_t			*mlx;
+
+	mlx = param;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		image->instances[0].y -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		image->instances[0].y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		image->instances[0].x -= 0;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		image->instances[0].x += 5;
 }
 
 int32_t	main(void)
 {
-	mlx_image_t	*img;
 	mlx_t		*mlx;
 
-	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!mlx)
-		ft_error();
-	img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0)))
-		ft_error();
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-	mlx_loop_hook(mlx, ft_hook, mlx);
+		error();
+	image = mlx_new_image(mlx, 1280, 128);
+	if (!image)
+        return (mlx_close_window(mlx), error());
+	if (mlx_image_to_window(mlx, image, 0, 0))
+        return (mlx_close_window(mlx), error());
+	mlx_loop_hook(mlx, randomize, mlx);
+	mlx_loop_hook(mlx, hook, mlx);
+
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
