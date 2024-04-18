@@ -6,7 +6,7 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/04/16 11:09:32 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/18 11:26:29 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = cc
 
 LIBMLX := ./MLX42
 LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS := main.c
+SRCS := main.c complex.c
 
 OBJDIR := 0_obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 11:09:55 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/16 12:10:07 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:25:23 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,37 +45,37 @@ void	randomize(void *param)
 		}
 }
 
-void	hook(void *param)
-{
-	mlx_t			*mlx;
-
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 0;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
-}
-
 int32_t	main(void)
 {
 	mlx_t		*mlx;
+	uint32_t	x;
+	uint32_t	y;
 
 	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!mlx)
 		error();
-	image = mlx_new_image(mlx, 1280, 128);
+	image = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!image)
         return (mlx_close_window(mlx), error());
 	if (mlx_image_to_window(mlx, image, 0, 0))
         return (mlx_close_window(mlx), error());
-	mlx_loop_hook(mlx, randomize, mlx);
-	mlx_loop_hook(mlx, hook, mlx);
+
+	// mlx_loop_hook(mlx, randomize, mlx);
+	y = 50;
+	while (y < 1000)
+	{
+		x = 50;
+		while (x < 1000)
+		{
+			if (complex_calc(0, 0, x, y) == 1)
+				mlx_put_pixel(image, x, y, 0x000000FF);
+			else if (complex_calc(0, 0, x, y) == -1)
+				mlx_put_pixel(image, x, y, 0xFFFFFFFF);
+			// mlx_put_pixel(image, x, y, rand() % 0xffffff);
+			x++;
+		}
+		y++;
+	}
 
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
