@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/18 12:24:26 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:12:31 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,18 @@ int	complex_calc(double r, double i, double cr, double ci)
 
 	ri[0] = 0;
 	ri[0] = 0;
-	cr /= 10000;
-	ci /= 10000;
-	while (++it < 200)
+	// cr = -0.123;
+	// ci = 0.736;
+	while (++it < 100)
 	{
 		r = ri[0] * ri[0] + ri[1] * ri[1] * -1 + cr;
 		i = ri[0] * ri[1] + ri[1] * ri[0] + ci;
 		ri[0] = r;
 		ri[1] = i;
+		// printf("%f, %f\n", r, i);
 	}
+	printf("\n");
+
 	if (ri[0] < 2 && ri[1] < 2)
 	{
 		printf("%f, %f IS STABLE\n", cr, ci);
@@ -52,12 +55,4 @@ int	complex_calc(double r, double i, double cr, double ci)
 // int	main(void)
 // {
 // 	complex_calc(0, 0, 0, 0);
-// 	double test = 0.123;
-// 	int i = -1;
-
-// 	while(++i < 5)
-// 	{
-// 		test += 0.0001;
-// 		printf("test %d = %f\n", i, test);
-// 	}
 // }

@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 11:09:55 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/18 12:25:23 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:16:26 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,100 @@ void	randomize(void *param)
 		}
 }
 
+// int put_pxl(uint32_t x, uint32_t y)
+// {
+	// uint32_t	r;
+	// uint32_t	i;
+
+	// y = HEIGHT;
+	// while (y > HEIGHT / 2)
+	// {
+	// 	// -r, +i
+	// 	x = 0;
+	// 	while (x < WIDTH)
+	// 	{
+	// 		mlx_put_pixel(image, x, y, rand() % 0xffffff);
+	// 		x++;
+	// 	}
+	// 	y--;
+	// }
+	// while (y > 0)
+	// {
+	// 	// -r, -i
+	// 	x = 0;
+	// 	while (x < WIDTH / 2)
+	// 	{
+	// 		mlx_put_pixel(image, x, y, 0xFFFFFFFF);
+	// 		x++;
+	// 	}
+	// 	y--;
+	// }
+	// y = HEIGHT;
+	// while (y > HEIGHT / 2)
+	// {
+	// 	// +r, +i
+	// 	x = WIDTH / 2;
+	// 	while (x < WIDTH)
+	// 	{
+	// 		mlx_put_pixel(image, x, y, 0x000000FF);
+	// 		x++;
+	// 	}
+	// 	y--;
+	// }
+	// while (y > 0)
+	// {
+	// 	// +r, -i
+	// 	x = WIDTH / 2;
+	// 	while (x < WIDTH)
+	// 	{
+	// 		mlx_put_pixel(image, x, y, 0xFFF000FF);
+	// 		x++;
+	// 	}
+	// 	y--;
+	// }
+// 	return (0);
+// }
+
+double *convert_values(double x, double y)
+{
+	double	*ri;
+
+	ri = NULL;
+	ri = malloc (2 * sizeof(double));
+	x -= (WIDTH / 2);
+	y -= (HEIGHT / 2);
+	ri[0] = x / 1000;
+	ri[1] = y / 1000;
+	// printf("%f, %f", ri[0], ri[1]);
+	return (ri);
+}
+
+int put_pxl(uint32_t x, uint32_t y)
+{
+	double *ri;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		// -r, +i
+		x = 0;
+		while (x < WIDTH)
+		{
+			ri = convert_values((double)x, (double)y);
+			if (complex_calc(0, 0, ri[0], ri[1]) == 1)
+				mlx_put_pixel(image, x, y, 0x000000FF);
+			else
+				mlx_put_pixel(image, x, y, 0xFFFFFFFF);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 int32_t	main(void)
 {
 	mlx_t		*mlx;
-	uint32_t	x;
-	uint32_t	y;
 
 	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!mlx)
@@ -60,23 +149,7 @@ int32_t	main(void)
 	if (mlx_image_to_window(mlx, image, 0, 0))
         return (mlx_close_window(mlx), error());
 
-	// mlx_loop_hook(mlx, randomize, mlx);
-	y = 50;
-	while (y < 1000)
-	{
-		x = 50;
-		while (x < 1000)
-		{
-			if (complex_calc(0, 0, x, y) == 1)
-				mlx_put_pixel(image, x, y, 0x000000FF);
-			else if (complex_calc(0, 0, x, y) == -1)
-				mlx_put_pixel(image, x, y, 0xFFFFFFFF);
-			// mlx_put_pixel(image, x, y, rand() % 0xffffff);
-			x++;
-		}
-		y++;
-	}
-
+	put_pxl(0, 0);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
