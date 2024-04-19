@@ -6,14 +6,14 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/04/18 11:26:29 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/19 15:26:55 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################## ARGUMENTS ########################
 
 NAME = fractol
-HEADERS = -I./include -I$(LIBMLX)/include
+HEADERS = -I. -I./include -I$(LIBMLX)/include
 DEPFLAGS = -MP -MD
 CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast $(DEPFLAGS)
 CC = cc
@@ -22,7 +22,8 @@ CC = cc
 
 LIBMLX := ./MLX42
 LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS := main.c complex.c
+SRCS := ./r_include/fractol.c ./r_include/complex.c ./r_include/rendering.c \
+		./r_include/utils.c
 
 OBJDIR := 0_obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
