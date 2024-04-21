@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/19 15:29:52 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/21 10:20:42 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ uint32_t shaders(uint32_t color1, uint32_t color2, float percentage)
     return (uint32_t)((r << 16) | (g << 8) | b | 0xFF000000);
 }
 
-int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image)
+int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 {
 	uint32_t	shade;
 	double		*ri;
 	int			instability;
-	// static	mlx_texture_t	*t;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -62,7 +61,7 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image)
 		while (x < WIDTH)
 		{
 			ri = convert_values((double)x, (double)y);
-			instability = complex_calc(0, 0, ri[0], ri[1]);
+			instability = complex_calc('j', ri[0], ri[1]);
 			if (!instability)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else

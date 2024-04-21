@@ -3,12 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
+#    By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 09:53:02 by adesille          #+#    #+#              #
-#    Updated: 2024/04/15 13:44:37 by adesille         ###   ########.fr        #
+#    Updated: 2024/04/21 11:00:22 by isb3             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+######################## ARGUMENTS ########################
+
+NAME = libft.a
+CFLAGS += -Wall -Wextra -Werror
+CC = cc
+
+######################## SOURCES ########################
 
 SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 		ft_isascii.c ft_isprint.c ft_strlen.c \
@@ -21,38 +29,37 @@ SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 		ft_strjoin.c ft_strtrim.c ft_split.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 		ft_putnbr_fd.c ft_strmapi.c ft_striteri.c \
-		ft_itoa.c
+		ft_itoa.c ft_strcmp.c
 
 BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 		ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-OBJS = 	$(SRCS:.c=.o) 
-OBJS_BONUS = $(BONUS:.c=.o)
+OBJDIR = obj
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
+OBJS_BONUS = $(BONUS:%.c=$(OBJDIR)/%.o)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
+######################## RULES ########################
 
-NAME = libft.a
+all: $(NAME)
 
-all :	$(NAME)
+$(NAME): $(OBJS)
+	@echo "Compiling libft..."
+	@ar rcs $(NAME) $(OBJS)
 
-$(NAME):	$(OBJS)
-		ar rcs $(NAME) $(OBJS)
-
-bonus : $(OBJS_BONUS)
-		ar rcs $(NAME) $(OBJS_BONUS)
-
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-clean :
-		$(RM) $(OBJS) $(OBJS_BONUS)
-
-fclean : clean
-		$(RM) $(NAME)
-
-re :	fclean all
+bonus : ${OBJS_BONUS}
+	@ar rcs $(NAME) $(OBJS_BONUS)
 	
-.PHONY : all clean fclean re bonus
+${OBJDIR}/%.o: %.c
+	@mkdir -p ${@D}
+	@${CC} ${CFLAGS} -c $< -o $@
+
+clean:
+	$(RM) -r $(OBJDIR)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re bonus
