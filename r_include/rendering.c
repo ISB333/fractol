@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 12:18:53 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 19:52:39 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	convert_values(double x, double y, t_coord **axis)
 {
 	x -= (WIDTH / 2);
 	y -= (HEIGHT / 2);
-	(*axis)->xr = x / 500;
-	(*axis)->yi = y / 500;
+	(*axis)->xr = x / 300;
+	(*axis)->yi = y / 300;
 }
 
 uint32_t shaders(uint32_t color1, uint32_t color2, float percentage)

@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 12:24:16 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 19:43:20 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,50 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 			(*axis)->ci = 0.5;
 		}
 		else if (!ft_strcmp("Mandelbrot", s_set) || !ft_strcmp("mandelbrot", s_set))
-		{
 			(*axis)->set = 'm';
-			(*axis)->cr = 0;
-			(*axis)->ci = 0;
-		}
 		else if (!ft_strcmp("Templar", s_set) || !ft_strcmp("templar", s_set))
 		{
 			(*axis)->set = 'j';
 			(*axis)->cr = -1.476;
 			(*axis)->ci = 0;
 		}
+		else if (!ft_strcmp("Burning Ship", s_set) || !ft_strcmp("burning", s_set))
+		{
+			(*axis)->set = 'b';
+			(*axis)->cr = -1.476;
+			(*axis)->ci = 0;
+		}
+		else if (!ft_strcmp("Nova", s_set) || !ft_strcmp("nova", s_set))
+		{
+			(*axis)->set = 'n';
+			(*axis)->cr = 0;
+			(*axis)->ci = 0;
+		}
 	}
 	return (*axis);
 }
+/////// TO MOTHERFUCKING DO /////
+/*
+	-0- Correct Valgrind Issues
+	-1- HD Pixels
+
+	-2- Differents Sets
+		-2.1- Julia Sets (Presets + argv given)
+		-2.2- Nova Fractals sets
+			- https://rotgers.io/posts/nova-fractals/
+	-3- Renders parameters by arg given
+	-4- Zoom & Dezoom (following mouse)
+	-5- Move View through Arrow Keys
+	-6- Increase Window H/W by Window Size
+	-7- Color Shift
+*/
 
 int32_t	main(void)
 {
 	t_data	*d;
 	t_coord	*axis;
 
-	if (init_img(&d) && parse_coord(&axis, "Julia"))
+	if (init_img(&d) && parse_coord(&axis, "Mandelbrot"))
 	{
 		put_pxl(0, 0, d->image, &axis);
 		// create_window()
