@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 12:13:43 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 12:15:26 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@ f(z) = (n +/- i)^2 + (n + i)
 f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
 
 */
-
-// int	mandelbrot(double r, double i, t_coord **axis)
-// {
-// 	int	it;
-
-// 	it = -1;
-// 	(*axis)->cr = 0;
-// 	(*axis)->ci = 0;
-// 	while (++it < 100)
-// 	{
-// 		r = (*axis)->cr * (*axis)->cr + (*axis)->ci * (*axis)->ci * -1 + (*axis)->xr;
-// 		i = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
-// 		(*axis)->cr = r;
-// 		(*axis)->ci = i;
-// 		if ((*axis)->cr > 2 || (*axis)->ci > 2)
-// 			return (it);
-// 	}
-// 	return (0);
-// }
 
 int	mandelbrot(double r, t_coord **axis)
 {

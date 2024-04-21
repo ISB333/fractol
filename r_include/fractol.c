@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 11:33:13 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 12:19:37 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 		{
 			(*axis)->set = 'm';
 			(*axis)->cr = 0;
+			(*axis)->ci = 0;
+		}
+		(*axis)->xr = 0;
+		(*axis)->yi = 0;
+		else if (ft_strcmp("Templar", s_set) || ft_strcmp("templar", s_set))
+		{
+			(*axis)->set = 'j';
+			(*axis)->cr = -1.476;
 			(*axis)->ci = 0;
 		}
 		(*axis)->xr = 0;

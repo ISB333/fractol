@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 12:13:51 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 12:18:53 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 		while (x < WIDTH)
 		{
 			convert_values((double)x, (double)y, axis);
-			instability = complex_calc('m', axis);
+			instability = complex_calc((*axis)->set, axis);
 			if (!instability)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
