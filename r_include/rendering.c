@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 10:20:42 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 12:13:51 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@
 // 	return (r << 24 | g << 16 | b << 8 | a);
 // }
 
-double *convert_values(double x, double y)
+void	convert_values(double x, double y, t_coord **axis)
 {
-	double	*ri;
-
-	ri = NULL;
-	ri = malloc (2 * sizeof(double));
 	x -= (WIDTH / 2);
 	y -= (HEIGHT / 2);
-	ri[0] = x / 500;
-	ri[1] = y / 500;
-	return (ri);
+	(*axis)->xr = x / 500;
+	(*axis)->yi = y / 500;
 }
 
 uint32_t shaders(uint32_t color1, uint32_t color2, float percentage)
@@ -50,18 +45,17 @@ uint32_t shaders(uint32_t color1, uint32_t color2, float percentage)
 int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 {
 	uint32_t	shade;
-	double		*ri;
+	// double		*ri;
 	int			instability;
 
-	y = 0;
 	while (y < HEIGHT)
 	{
 		// -r, +i
 		x = 0;
 		while (x < WIDTH)
 		{
-			ri = convert_values((double)x, (double)y);
-			instability = complex_calc('j', ri[0], ri[1]);
+			convert_values((double)x, (double)y, axis);
+			instability = complex_calc('m', axis);
 			if (!instability)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
@@ -71,7 +65,7 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 			}
 			x += 1;
 		}
-		y += 1;
+		y++;
 	}
 	return (0);
 }

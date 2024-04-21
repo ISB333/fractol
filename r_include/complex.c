@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 10:09:54 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 12:13:43 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,64 @@ f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
 
 */
 
-int	mandelbrot(double r, double i, double ri[2])
+// int	mandelbrot(double r, double i, t_coord **axis)
+// {
+// 	int	it;
+
+// 	it = -1;
+// 	(*axis)->cr = 0;
+// 	(*axis)->ci = 0;
+// 	while (++it < 100)
+// 	{
+// 		r = (*axis)->cr * (*axis)->cr + (*axis)->ci * (*axis)->ci * -1 + (*axis)->xr;
+// 		i = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
+// 		(*axis)->cr = r;
+// 		(*axis)->ci = i;
+// 		if ((*axis)->cr > 2 || (*axis)->ci > 2)
+// 			return (it);
+// 	}
+// 	return (0);
+// }
+
+int	mandelbrot(double r, t_coord **axis)
 {
 	int	it;
-	// double ri[2];
 
 	it = -1;
-
-	// ri[0] = 0;
-	// ri[1] = 0;
+	(*axis)->cr = 0;
+	(*axis)->ci = 0;
 	while (++it < 100)
 	{
-		r = ri[0] * ri[0] + ri[1] * ri[1] * -1 + 0;
-		i = ri[0] * ri[1] + ri[1] * ri[0] + 0;
-		ri[0] = r;
-		ri[1] = i;
-		if (ri[0] > 2 || ri[1] > 2)
+		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
+		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
+		(*axis)->cr = r;
+		if ((*axis)->cr > 2 || (*axis)->ci > 2)
 			return (it);
 	}
 	return (0);
 }
 
-int	julia(double r, double i, double ri[2])
+int	julia(double r, t_coord **axis)
 {
 	int	it;
-	// double ri[2];
 
 	it = -1;
-
-	// ri[0] = cr;
-	// ri[1] = ci;
-	// cr = -0.123;
-	// ci = 0.736;
 	while (++it < 100)
 	{
-		r = ri[0] * ri[0] + ri[1] * ri[1] * -1 + 0.285;
-		i = ri[0] * ri[1] + ri[1] * ri[0] + 0.01;
-		ri[0] = r;
-		ri[1] = i;
-		if (ri[0] > 2 || ri[1] > 2)
+		r = pow((*axis)->xr, 2) + pow((*axis)->yi, 2) * -1 + (*axis)->cr;
+		(*axis)->yi = (*axis)->xr * (*axis)->yi * 2 + (*axis)->ci;
+		(*axis)->xr = r;
+		if ((*axis)->xr > 2 || (*axis)->yi > 2)
 			return (it);
 	}
 	return (0);
 }
 
-int	complex_calc(char set, double x, double y)
+int	complex_calc(char set, t_coord **axis)
 {
-	double	ri[2];
-	
-	ri[0] = x;
-	ri[1] = y;
 	if (set == 'j')
-		return (julia(0, 0, ri));
-	return (mandelbrot(0, 0, ri));
+		return (julia(0, axis));
+	return (mandelbrot(0, axis));
 }
 
 // int	main(void)

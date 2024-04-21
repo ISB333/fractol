@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 10:38:20 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/21 11:33:13 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 		if (ft_strcmp("Julia", s_set) || ft_strcmp("julia", s_set))	
 		{
 			(*axis)->set = 'j';
-			(*axis)->cr = -0.8;
-			(*axis)->ci = 0.156;
+			(*axis)->cr = 0.3;
+			(*axis)->ci = 0.5;
 		}
 		else if (ft_strcmp("Mandelbrot", s_set) || ft_strcmp("mandelbrot", s_set))
 		{
@@ -53,9 +53,9 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 			(*axis)->cr = 0;
 			(*axis)->ci = 0;
 		}
+		(*axis)->xr = 0;
+		(*axis)->yi = 0;
 	}
-	char *str = ft_substr("salut", 0, 5);
-	printf("%s\n", str);
 	return (*axis);
 }
 
@@ -72,6 +72,8 @@ int32_t	main(void)
 			return (mlx_close_window(d->mlx), error());		
 		mlx_loop(d->mlx);
 		mlx_terminate(d->mlx);
+		return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
 	}
-	return (EXIT_SUCCESS);
+	mlx_terminate(d->mlx);
+	return (ff(d, axis), printf("error\n"), 1);
 }
