@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 14:37:40 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:29:22 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,40 +79,29 @@ f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
 // 	return (0);
 // }
 
-void	complex_sin(t_coord **axis)
+int	mandelbrot(double r, t_coord **axis)
 {
-	double	r;
-        // a: z.a.sin() * z.b.cosh(),
-		r = sin((*axis)->cr) * cosh((*axis)->ci);
-		(*axis)->ci = cos((*axis)->cr) * sinh((*axis)->ci);
+	int	it;
+
+	// f() = (0 + 0i)^2 + (x + yi)
+
+	it = -1;
+	(*axis)->cr = 0;
+	(*axis)->ci = 0;
+	while (++it < 100)
+	{
+		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
+		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
 		(*axis)->cr = r;
-        // b: z.a.cos() * z.b.sinh()
+		// printf("%f\n", sin((*axis)->ci));
+		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
+			return (it);
+	}
+	if (it == 100)
+		return (0);
+	else
+		return (it);
 }
-
-
-// int	mandelbrot(double r, t_coord **axis)
-// {
-// 	int	it;
-
-// 	// f() = (0 + 0i)^2 + (x + yi)
-
-// 	it = -1;
-// 	(*axis)->cr = 0;
-// 	(*axis)->ci = 0;
-// 	while (++it < 100)
-// 	{
-// 		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
-// 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
-// 		(*axis)->cr = r;
-// 		printf("%f\n", sin((*axis)->ci));
-// 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
-// 			return (it);
-// 	}
-// 	if (it == 100)
-// 		return (0);
-// 	else
-// 		return (it);
-// }
 
 int	julia(double r, t_coord **axis)
 {

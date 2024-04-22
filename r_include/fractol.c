@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 15:05:28 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:48:49 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,20 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 /*
 	-0- f(z) = sin(z) +c
 		- https://rotgers.io/posts/sinz_fractal/
-		- 
-	-1- HD Pixels
 		- https://dev.to/freerangepixels/a-probably-terrible-way-to-render-gradients-1p3n
-	-2- Differents Sets
-		-2.1- Julia Sets (Presets + argv given)
-		-2.2- Nova Fractals sets
+	-1- Zoom & Dezoom (following mouse)
+	-2- Window Management
+		-2.1- ESC == Quit
+		-2.2- Increase Window H/W by Window Size (mlx_resizefunc)
+
+	-3- Differents Sets
+		-3.1- Julia Sets (Presets + argv given)
+		-3.2- Nova Fractals sets
 			- https://rotgers.io/posts/nova-fractals/
-	-3- Renders parameters by arg given
-	-4- Zoom & Dezoom (following mouse)
+	-4- Parameters by arg given
+		-4.1- If no or wrong parameters == quit and Show params available
 	-5- Move View through Arrow Keys
-	-6- Increase Window H/W by Window Size
-	-7- Color Shift
+	-6- Color Shift
 */
 
 int32_t	main(void)
@@ -102,6 +104,7 @@ int32_t	main(void)
 		if (mlx_image_to_window(d->mlx, d->image, 0, 0))
 			return (mlx_close_window(d->mlx), error());		
 		mlx_loop(d->mlx);
+		if (mlx_scroll_func())
 		mlx_terminate(d->mlx);
 		return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
 	}
