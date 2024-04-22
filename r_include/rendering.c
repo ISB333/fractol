@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 11:51:31 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:56:17 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 			else
 			{
 				printf("%d\n", instability);
+				//lol
 				// shade = shaders(0x360000FF, 0x4CAF50FF, instability, y);
 				shade = shaders(instability);
 				mlx_put_pixel(image, x, y, shade);
