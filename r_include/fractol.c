@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 19:43:20 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/22 09:08:10 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int32_t	main(void)
 	t_data	*d;
 	t_coord	*axis;
 
+	d = NULL;
+	axis = NULL;
 	if (init_img(&d) && parse_coord(&axis, "Mandelbrot"))
 	{
 		put_pxl(0, 0, d->image, &axis);
@@ -98,9 +100,16 @@ int32_t	main(void)
 		if (mlx_image_to_window(d->mlx, d->image, 0, 0))
 			return (mlx_close_window(d->mlx), error());		
 		mlx_loop(d->mlx);
+		ff(d, axis);
 		mlx_terminate(d->mlx);
-		return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
+		printf("Success\n");
+		return (0);
+		// mlx_terminate(d->mlx);
+		// return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
 	}
+	ff(d, axis);
 	mlx_terminate(d->mlx);
-	return (ff(d, axis), printf("error\n"), 1);
+	printf("error\n");
+	return (1);
+	// return (ff(d, axis), printf("error\n"), 1);
 }
