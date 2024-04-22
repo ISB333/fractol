@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 11:50:17 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:05:28 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 }
 /////// TO MOTHERFUCKING DO /////
 /*
+	-0- f(z) = sin(z) +c
+		- https://rotgers.io/posts/sinz_fractal/
+		- 
 	-1- HD Pixels
-
+		- https://dev.to/freerangepixels/a-probably-terrible-way-to-render-gradients-1p3n
 	-2- Differents Sets
 		-2.1- Julia Sets (Presets + argv given)
 		-2.2- Nova Fractals sets

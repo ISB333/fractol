@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 11:44:53 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:37:40 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,31 +79,40 @@ f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
 // 	return (0);
 // }
 
-int	mandelbrot(double r, t_coord **axis)
+void	complex_sin(t_coord **axis)
 {
-	int	it;
-
-	// f() = (0 + 0i)^2 + (x + yi)
-
-	it = -1;
-	(*axis)->cr = 0;
-	(*axis)->ci = 0;
-	// while ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) < 4) && ++it < 100)
-	while (++it < 100)
-	{
-		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
-		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
+	double	r;
+        // a: z.a.sin() * z.b.cosh(),
+		r = sin((*axis)->cr) * cosh((*axis)->ci);
+		(*axis)->ci = cos((*axis)->cr) * sinh((*axis)->ci);
 		(*axis)->cr = r;
-		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
-			return (it);
-		// if ((*axis)->cr > 2 && (*axis)->ci > 2)
-		// 	return (it);
-	}
-	if (it == 100)
-		return (0);
-	else
-		return (it);
+        // b: z.a.cos() * z.b.sinh()
 }
+
+
+// int	mandelbrot(double r, t_coord **axis)
+// {
+// 	int	it;
+
+// 	// f() = (0 + 0i)^2 + (x + yi)
+
+// 	it = -1;
+// 	(*axis)->cr = 0;
+// 	(*axis)->ci = 0;
+// 	while (++it < 100)
+// 	{
+// 		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
+// 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
+// 		(*axis)->cr = r;
+// 		printf("%f\n", sin((*axis)->ci));
+// 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
+// 			return (it);
+// 	}
+// 	if (it == 100)
+// 		return (0);
+// 	else
+// 		return (it);
+// }
 
 int	julia(double r, t_coord **axis)
 {
@@ -117,7 +126,7 @@ int	julia(double r, t_coord **axis)
 		r = pow((*axis)->xr, 2) + pow((*axis)->yi, 2) * -1 + (*axis)->cr;
 		(*axis)->yi = (*axis)->xr * (*axis)->yi * 2 + (*axis)->ci;
 		(*axis)->xr = r;
-		if ((*axis)->xr > 2 || (*axis)->yi > 2)
+		if (pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4)
 			return (it);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 11:56:17 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:30:41 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ uint32_t shaders_to100(uint32_t color1, uint32_t color2, float percentage)
     uint8_t g2 = (color2 >> 8) & 0xFF;
     uint8_t b2 = color2 & 0xFF;
 
+	percentage /= 100;
+
     uint8_t r = (uint8_t)(r1 + (r2 - r1) * percentage);
     uint8_t g = (uint8_t)(g1 + (g2 - g1) * percentage);
     uint8_t b = (uint8_t)(b1 + (b2 - b1) * percentage);
@@ -99,6 +101,8 @@ uint32_t shaders_to66(uint32_t color1, uint32_t color2, float percentage)
     uint8_t r2 = (color2 >> 16);
     uint8_t g2 = (color2 >> 8) & 0xFF;
     uint8_t b2 = color2 & 0xFF;
+
+	percentage /= 100;
 
     uint8_t r = (uint8_t)(r1 + (r2 - r1) * percentage);
     uint8_t g = (uint8_t)(g1 + (g2 - g1) * percentage);
@@ -117,6 +121,11 @@ uint32_t shaders_to33(uint32_t color1, uint32_t color2, float percentage)
     uint8_t g2 = (color2 >> 8) & 0xFF;
     uint8_t b2 = color2 & 0xFF;
 
+	if (percentage < 10)
+		percentage /= 10;
+	else if (percentage >= 10)
+		percentage = percentage / 100 * 3;
+
     uint8_t r = (uint8_t)(r1 + (r2 - r1) * percentage);
     uint8_t g = (uint8_t)(g1 + (g2 - g1) * percentage);
     uint8_t b = (uint8_t)(b1 + (b2 - b1) * percentage);
@@ -126,12 +135,12 @@ uint32_t shaders_to33(uint32_t color1, uint32_t color2, float percentage)
 
 uint32_t	shaders(float instability)
 {
-	if (instability <= 33)
+	if (instability <= 100)
 		return (shaders_to33(0x360000FF, 0x4CAF50FF, instability));
-	else if (instability <= 66)
+	else if (instability <= 40)
 		return (shaders_to66(0xF400FFFF, 0xFF0000FF, instability));
 	else
-		return (shaders_to100(0xE52B2BFF, 0x1F11CEFF, instability));
+		return (shaders_to100(0xFF0000FF, 0xA100A1FF, instability));
 }
 
 int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
@@ -152,8 +161,7 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
 			{
-				printf("%d\n", instability);
-				//lol
+				// printf("%d\n", instability);
 				// shade = shaders(0x360000FF, 0x4CAF50FF, instability, y);
 				shade = shaders(instability);
 				mlx_put_pixel(image, x, y, shade);
