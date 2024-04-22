@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 09:08:10 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:59:11 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_coord	*parse_coord(t_coord **axis, char *s_set)
 }
 /////// TO MOTHERFUCKING DO /////
 /*
-	-0- Correct Valgrind Issues
 	-1- HD Pixels
 
 	-2- Differents Sets
@@ -100,16 +99,9 @@ int32_t	main(void)
 		if (mlx_image_to_window(d->mlx, d->image, 0, 0))
 			return (mlx_close_window(d->mlx), error());		
 		mlx_loop(d->mlx);
-		ff(d, axis);
 		mlx_terminate(d->mlx);
-		printf("Success\n");
-		return (0);
-		// mlx_terminate(d->mlx);
-		// return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
+		return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
 	}
-	ff(d, axis);
 	mlx_terminate(d->mlx);
-	printf("error\n");
-	return (1);
-	// return (ff(d, axis), printf("error\n"), 1);
+	return (ff(d, axis), printf("error\n"), 1);
 }

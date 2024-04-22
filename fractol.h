@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 12:07:44 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/22 10:50:59 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <memory.h>
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 2000
+# define HEIGHT 2000
+# define R(a) (a) >> 16
+# define G(a) ((a) >> 8) & 0xFF
+# define B(a) (a) & 0xFF
+# define RGB(a, b, c) ((a) << 16) + ((b) << 8) + (c)
+
 
 typedef struct s_coord
 {

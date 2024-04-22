@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/21 20:35:53 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/22 11:44:53 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,21 @@ int	mandelbrot(double r, t_coord **axis)
 	it = -1;
 	(*axis)->cr = 0;
 	(*axis)->ci = 0;
+	// while ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) < 4) && ++it < 100)
 	while (++it < 100)
 	{
 		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
 		(*axis)->cr = r;
-		if ((*axis)->cr > 2 || (*axis)->ci > 2)
+		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 			return (it);
+		// if ((*axis)->cr > 2 && (*axis)->ci > 2)
+		// 	return (it);
 	}
-	return (0);
+	if (it == 100)
+		return (0);
+	else
+		return (it);
 }
 
 int	julia(double r, t_coord **axis)
