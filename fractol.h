@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 16:35:40 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/23 16:19:43 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <memory.h>
-# define WIDTH 1500
+# define WIDTH 2000
 # define HEIGHT 1000
 # define R(a) (a) >> 16
 # define G(a) ((a) >> 8) & 0xFF
@@ -37,6 +37,7 @@ typedef struct s_coord
 	double	cr;
 	double	ci;
 	double	temp;
+	int it;
 }	t_coord;
 
 typedef struct s_data

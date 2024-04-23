@@ -15,13 +15,13 @@
 NAME = fractol
 HEADERS = -I. -I./include -I$(LIBMLX)/include -I./libft
 # DEPFLAGS = -MP -MD
-CFLAGS += -Wall -Wextra -Wunreachable-code -ofast
+CFLAGS += -Wall -Wextra -Wunreachable-code -ofast -g3 -fsanitize=address
 CC = cc
 
 ######################## SOURCES ########################
 
 LIBMLX := ./MLX42
-LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g3
 SRCS := ./r_include/fractol.c ./r_include/complex.c ./r_include/rendering.c \
 		./r_include/utils.c
 

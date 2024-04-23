@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/22 16:48:49 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/23 16:23:38 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int32_t	main(void)
 {
 	t_data	*d;
 	t_coord	*axis;
+	double time;
 
 	d = NULL;
 	axis = NULL;
@@ -104,10 +105,12 @@ int32_t	main(void)
 		if (mlx_image_to_window(d->mlx, d->image, 0, 0))
 			return (mlx_close_window(d->mlx), error());		
 		mlx_loop(d->mlx);
-		if (mlx_scroll_func())
-		mlx_terminate(d->mlx);
+		// if (mlx_scroll_func())
+		mlx_delete_image(d->mlx, d->image);
+		// mlx_terminate(d->mlx);
 		return (ff(d, axis), printf("Success!\n"), EXIT_SUCCESS);
 	}
-	mlx_terminate(d->mlx);
+	mlx_delete_image(d->mlx, d->image);
+	// mlx_terminate(d->mlx);
 	return (ff(d, axis), printf("error\n"), 1);
 }
