@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/23 15:43:52 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/24 10:52:51 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	mandelbrot(double r, t_coord **axis)
 	it = -1;
 	(*axis)->cr = 0;
 	(*axis)->ci = 0;
-	while (++it < 256)
+	while (++it < 100)
 	{
 		r = pow((*axis)->cr, 2) + pow((*axis)->ci, 2) * -1 + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
@@ -99,7 +99,7 @@ int	mandelbrot(double r, t_coord **axis)
 		// if (pow((*axis)->cr, 2) >= 2 || pow((*axis)->ci, 2) >= 2)
 		// 	return (it);
 	}
-	if (it == 256)
+	if (it == 100)
 		return (0);
 	else
 		return (it);
@@ -112,7 +112,7 @@ int	julia(double r, t_coord **axis)
 	// f() = (x + yi)^2 + (cr * ci)
 
 	it = -1;
-	while (++it < 256)
+	while (++it < 100)
 	{
 		r = pow((*axis)->xr, 2) + pow((*axis)->yi, 2) * -1 + (*axis)->cr;
 		(*axis)->yi = (*axis)->xr * (*axis)->yi * 2 + (*axis)->ci;

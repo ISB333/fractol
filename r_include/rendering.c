@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/23 16:20:23 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/24 12:20:28 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,24 @@ void	convert_values(double x, double y, t_coord **axis)
 	(*axis)->yi = y / 500;
 }
 
-uint32_t shaders_to100(int startcolor, int endcolor, uint32_t len, int pix)
+uint32_t shaders_to100(int startcolor, int endcolor, double len)
 {
     double increment[3];
     int new[3];
     int newcolor;
 
-    increment[0] = (double)((R(endcolor)) - (R(startcolor))) / (double)len;
-    increment[1] = (double)((G(endcolor)) - (G(startcolor))) / (double)len;
-    increment[2] = (double)((B(endcolor)) - (B(startcolor))) / (double)len;
+	len *= 2.55;
+    increment[0] = (double)((R(endcolor)) - (R(startcolor))) / len;
+    increment[1] = (double)((G(endcolor)) - (G(startcolor))) / len;
+    increment[2] = (double)((B(endcolor)) - (B(startcolor))) / len;
 
-    new[0] = (R(startcolor)) + round(pix * increment[0]);
-    new[1] = (G(startcolor)) + round(pix * increment[1]);
-    new[2] = (B(startcolor)) + round(pix * increment[2]);
+    // new[0] = (R(startcolor)) + round(pix * increment[0]);
+    // new[1] = (G(startcolor)) + round(pix * increment[1]);
+    // new[2] = (B(startcolor)) + round(pix * increment[2]);
+
+    new[0] = (R(startcolor)) + round(increment[0]);
+    new[1] = (G(startcolor)) + round(increment[1]);
+    new[2] = (B(startcolor)) + round(increment[2]);
 
     newcolor = RGB(new[0], new[1], new[2]);
 
@@ -49,9 +54,11 @@ uint32_t	shaders(float instability, uint32_t y)
 	// if (instability <= 20)
 	// 	return (shaders_to33(0x360000FF, 0x4CAF50FF, instability));
 	// else if (instability <= 40)
-	// 	return (shaders_to66(0xF400FFFF, 0xFF0000FF, instability));
 	// else
-		return (shaders_to100(0x000000FF, 0xA100A1FF, instability, y));
+	if (y > 1)
+		return (shaders_to100(0xF400FFFF, 0xFF0000FF, instability));
+	else
+		return (shaders_to100(0x000000FF, 0xA100A1FF, instability));
 }
 
 int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
@@ -73,9 +80,9 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 			else
 			{
 				if ((*axis)->it > 0)
-					shade = shaders(instability, x);
+					shade = shaders((double)instability, (*axis)->it);
 				else
-					shade = shaders(instability, y-x);
+					shade = shaders((double)instability, (*axis)->it);
 				mlx_put_pixel(image, x, y, shade);
 			}
 			// printf("%d\n\n", image->pixels);
@@ -84,5 +91,6 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 		y++;
 	}
 	(*axis)->it++;
+	printf("AAAAAAAAAAAAAAAAAa\n");
 	return (0);
 }
