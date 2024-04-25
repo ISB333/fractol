@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:22:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/24 12:20:28 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:11:46by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 		y++;
 	}
 	(*axis)->it++;
-	printf("AAAAAAAAAAAAAAAAAa\n");
+	// printf("AAAAAAAAAAAAAAAAAa\n");
 	return (0);
 }
