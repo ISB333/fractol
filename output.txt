@@ -1,0 +1,507 @@
+==191990== Memcheck, a memory error detector
+==191990== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==191990== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==191990== Command: ./fractol Mandelbrot
+==191990== Parent PID: 46744
+==191990== 
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11C7E0D6: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C7E86A: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C76239: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C74162: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C738E3: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C28435: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1140A90F: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11448A74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113413E8: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffd74c is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11C81D20: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C801E7: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C764BE: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C742D8: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C738E3: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C28435: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1140A90F: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11448A74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113413E8: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffd76c is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC9C47: D3DKMTQueryAdapterInfo (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x114661D4: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11611862: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1144A064: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113413E8: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x10EEC01A: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EEDE17: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EEDC86: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EED1C5: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x113350AE: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11337633: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffcbb4 is on thread 1's stack
+==191990==  in frame #1, created by D3DKMTQueryAdapterInfo (???:)
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTQueryAdapterInfo
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC9C47: D3DKMTQueryAdapterInfo (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11442A14: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1144A220: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113413E8: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x10EEC01A: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EEDE17: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EEDC86: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EED1C5: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x113350AE: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11337633: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11337E3F: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffcba4 is on thread 1's stack
+==191990==  in frame #1, created by D3DKMTQueryAdapterInfo (???:)
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTQueryAdapterInfo
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11C8453D: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C83EED: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CACA83: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CA7CC7: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CA7248: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CAD6A3: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C2F18C: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x113F2932: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113F2876: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffd9ec is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11D12393: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D11B8A: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0F8C8: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0F590: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C32F0B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1143D030: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x115548F2: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1144FCAC: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x114086C6: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffe6ac is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11D10843: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0FE3D: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0FCBF: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0F6E3: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0F590: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C32F0B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1143D030: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x115548F2: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1144FCAC: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffe68c is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11CA994A: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CFDB5B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D0676B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D06B19: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D06975: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D06356: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CFA743: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C45C7C: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x113E0D4E: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffe3cc is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11CFF301: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CFECF6: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D8787B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D9202F: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11DF4365: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C4CC1B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1135B58E: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1135B08D: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113DF6E7: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffe3cc is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11D00281: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11CFFC76: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D87CD4: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D92531: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11DF4365: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C4CC1B: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1135B58E: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1135B08D: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113DF6E7: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==  Address 0x1ffeffe3cc is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+}
+==191990== Invalid read of size 16
+==191990==    at 0x11DEBA50: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C4A206: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1135B162: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113DF6E7: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11551DFC: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1144FC7E: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x114086C6: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x10EEC4B1: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x10EEC1C5: ??? (in /usr/lib/wsl/lib/libd3d12.so)
+==191990==    by 0x11459A2B: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11459C71: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x65072D3: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==  Address 0x7fdf1e29a2b8 is not stack'd, malloc'd or (recently) free'd
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr16
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11D03621: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11D88105: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11DA193D: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11DA9C6E: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C47DD6: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x1136DE11: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1136DC41: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x64C2309: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x64C244F: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==  Address 0x1ffeffe96c is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC8DCD: D3DKMTWaitForSynchronizationObjectFromCpu (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x114631A8: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1157A811: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x64CA760: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x65073C9: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x64C3D73: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x5F76168: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x5A73216: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x53E9884: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0)
+==191990==    by 0x53ED3FE: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0)
+==191990==    by 0x4874E78: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.3)
+==191990==  Address 0x1ffeffef4c is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTWaitForSynchronizationObjectFromCpu
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   fun:glfwCreateWindow
+}
+==191990== Syscall param ioctl(generic) points to uninitialised byte(s)
+==191990==    at 0x4ACC94F: ioctl (ioctl.c:36)
+==191990==    by 0x10FC89BD: D3DKMTLock2 (in /usr/lib/wsl/lib/libdxcore.so)
+==191990==    by 0x11410C74: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x11D0E14D: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x11C3295D: ??? (in /usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so)
+==191990==    by 0x113DB98B: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x113ABC66: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x64BD8F9: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x64BDA4B: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x65937BA: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x64DDF7E: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==    by 0x64E08ED: ??? (in /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so)
+==191990==  Address 0x1ffeffea4c is on thread 1's stack
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   ioctl(generic)
+   fun:ioctl
+   fun:D3DKMTLock2
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/drivers/iigd_dch.inf_amd64_ffe7d9986336312b/libigd12um64xel.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/wsl/lib/libd3d12core.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+}
+==191990== Conditional jump or move depends on uninitialised value(s)
+==191990==    at 0x10B168: put_pxl (rendering.c:82)
+==191990==    by 0x10AA28: main (fractol.c:84)
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:put_pxl
+   fun:main
+}
+==191990== Conditional jump or move depends on uninitialised value(s)
+==191990==    at 0x10B030: shaders (rendering.c:58)
+==191990==    by 0x10B1C6: put_pxl (rendering.c:85)
+==191990==    by 0x10AA28: main (fractol.c:84)
+==191990== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:shaders
+   fun:put_pxl
+   fun:main
+}
+==191990== 
+==191990== Process terminating with default action of signal 2 (SIGINT)
+==191990==    at 0x4A43117: __futex_abstimed_wait_common64 (futex-internal.c:57)
+==191990==    by 0x4A43117: __futex_abstimed_wait_common (futex-internal.c:87)
+==191990==    by 0x4A43117: __futex_abstimed_wait_cancelable64 (futex-internal.c:139)
+==191990==    by 0x4A45A40: __pthread_cond_wait_common (pthread_cond_wait.c:503)
+==191990==    by 0x4A45A40: pthread_cond_wait@@GLIBC_2.3.2 (pthread_cond_wait.c:627)
+==191990==    by 0x112C274E: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1160D62A: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x1160DE0A: ??? (in /usr/lib/wsl/lib/libd3d12core.so)
+==191990==    by 0x4A46AC2: start_thread (pthread_create.c:442)
+==191990==    by 0x4AD7A03: clone (clone.S:100)
+==191990== 
+==191990== HEAP SUMMARY:
+==191990==     in use at exit: 22,105,686 bytes in 61,076 blocks
+==191990==   total heap usage: 105,013 allocs, 43,937 frees, 30,945,798 bytes allocated
+==191990== 
+==191990== LEAK SUMMARY:
+==191990==    definitely lost: 20,721 bytes in 7 blocks
+==191990==    indirectly lost: 1,528 bytes in 6 blocks
+==191990==      possibly lost: 7,386,190 bytes in 44,997 blocks
+==191990==    still reachable: 14,697,247 bytes in 16,066 blocks
+==191990==                       of which reachable via heuristic:
+==191990==                         newarray           : 418,080 bytes in 5 blocks
+==191990==         suppressed: 0 bytes in 0 blocks
+==191990== Rerun with --leak-check=full to see details of leaked memory
+==191990== 
+==191990== Use --track-origins=yes to see where uninitialised values come from
+==191990== For lists of detected and suppressed errors, rerun with: -s
+==191990== ERROR SUMMARY: 947769 errors from 16 contexts (suppressed: 760399 from 1746)
