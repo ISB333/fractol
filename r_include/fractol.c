@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/25 11:49:54 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/26 11:40:25 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(d->mlx);
 }
 
-
 /*
 -----------------------------------------
 |                                       |
@@ -35,7 +34,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 |                                       |
 |                                       |
 |                                       |
-----------------------------------------
+-----------------------------------------
 */
 
 void	scroll_hook(double xdelta, double ydelta, void *param)
@@ -44,10 +43,11 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	t_data	*d;
 
 	d = param;
-	mlx_get_mouse_pos(d->mlx, &d->axis->x, &d->axis->y);
+	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
 	printf("zoom * %d\nxdelta = %f\nydelta = %f\n", ++i, xdelta, ydelta);
-	printf("y mouse = %d\nx mouse = %d\n", d->axis->x, d->axis->y);
-	put_pxl(0, 0, d->image, &d->axis);
+	printf("y mouse = %d\nx mouse = %d\n", d->axis->x_zoom, d->axis->y_zoom);
+	d->axis->zoom *= 0.75;
+	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
 int	hook_init(t_data *d)
@@ -75,13 +75,15 @@ int32_t	main(int argc, char *argv[])
 
 	if (argc >= 2)
 	{
+		d = NULL;
+		axis = NULL;
 		if (parse_coord(&axis, argv))
 		{
 			if (init_img(&d))
 			{
 				d->axis = axis;
 				hook_init(d);
-				put_pxl(0, 0, d->image, &axis);
+				put_pxl(d->image, &axis, 1);
 				if (mlx_image_to_window(d->mlx, d->image, 0, 0) == -1)
 					return (mlx_close_window(d->mlx), error());		
 				mlx_loop(d->mlx);

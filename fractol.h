@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/25 11:39:28 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/26 11:42:32 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef struct s_coord
 	double	ci;
 	double	temp;
 	int		it;
-	int		zoom;
-	int32_t	x;
-	int32_t	y;
+	double	zoom;
+	int32_t	x_zoom;
+	int32_t	y_zoom;
 }	t_coord;
 
 typedef struct s_data
@@ -53,7 +53,7 @@ typedef struct s_data
 t_data	*init_img(t_data **d);
 t_coord	*parse_coord(t_coord **axis, char *argv[]);
 
-int		put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis);
+int		put_pxl(mlx_image_t *image, t_coord **axis, float zoom);
 int		complex_calc(char set, t_coord **axis);
 
 int		error(void);

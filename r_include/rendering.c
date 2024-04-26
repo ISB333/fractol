@@ -61,19 +61,20 @@ uint32_t	shaders(float instability, uint32_t y)
 		return (shaders_to100(0x000000FF, 0xA100A1FF, instability));
 }
 
-int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
+int put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
 {
 	uint32_t	shade;
-	// double		*ri;
+	uint32_t	x;
+	uint32_t	y;
 	int			instability;
 
+	y = 0;
 	while (y < HEIGHT)
 	{
-		// -r, +i
 		x = 0;
 		while (x < WIDTH)
 		{
-			convert_values((double)x, (double)y, axis);
+			convert_values((double)x * zoom, (double)y * zoom, axis);
 			instability = complex_calc((*axis)->set, axis);
 			if (!instability)
 				mlx_put_pixel(image, x, y, 0x000000FF);
@@ -85,12 +86,9 @@ int put_pxl(uint32_t x, uint32_t y, mlx_image_t *image, t_coord **axis)
 					shade = shaders((double)instability, (*axis)->it);
 				mlx_put_pixel(image, x, y, shade);
 			}
-			// printf("%d\n\n", image->pixels);
-			x += 1;
+			x++;
 		}
 		y++;
 	}
-	(*axis)->it++;
-	// printf("AAAAAAAAAAAAAAAAAa\n");
 	return (0);
 }
