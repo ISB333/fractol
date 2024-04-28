@@ -23,8 +23,8 @@ void	convert_values(double x, double y, t_coord **axis, float zoom)
 	y -= (HEIGHT / 2);
 
 	// Scale 
-	(*axis)->xr = x / 500 * zoom;
-	(*axis)->yi = y / 500 * zoom;
+	(*axis)->xr = x / 500 * zoom + (*axis)->x_zoom;
+	(*axis)->yi = y / 500 * zoom + (*axis)->y_zoom;
 }
 
 uint32_t shaders_to100(int startcolor, int endcolor, double len)
