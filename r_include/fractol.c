@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/26 11:40:25 by adesille         ###   ########.fr       */
+/*   Updated: 2024/04/28 11:02:01 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
 	printf("zoom * %d\nxdelta = %f\nydelta = %f\n", ++i, xdelta, ydelta);
 	printf("y mouse = %d\nx mouse = %d\n", d->axis->x_zoom, d->axis->y_zoom);
-	d->axis->zoom *= 0.75;
+	d->axis->zoom *= 0.9;
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 

@@ -17,12 +17,14 @@
 // 	return (r << 24 | g << 16 | b << 8 | a);
 // }
 
-void	convert_values(double x, double y, t_coord **axis)
+void	convert_values(double x, double y, t_coord **axis, float zoom)
 {
 	x -= (WIDTH / 2);
 	y -= (HEIGHT / 2);
-	(*axis)->xr = x / 500;
-	(*axis)->yi = y / 500;
+
+	// Scale 
+	(*axis)->xr = x / 500 * zoom;
+	(*axis)->yi = y / 500 * zoom;
 }
 
 uint32_t shaders_to100(int startcolor, int endcolor, double len)
@@ -74,7 +76,7 @@ int put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
 		x = 0;
 		while (x < WIDTH)
 		{
-			convert_values((double)x * zoom, (double)y * zoom, axis);
+			convert_values((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
 			if (!instability)
 				mlx_put_pixel(image, x, y, 0x000000FF);

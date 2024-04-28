@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/25 09:40:30 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/28 10:33:06 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	mandelbrot(double r, t_coord **axis)
 
 	it = -1;
 	(*axis)->cr = 0;
-	(*axis)->ci = 0;
+	(*axis)->ci = 0                                              ;
 	while (++it < 100)
 	{
 		r = pow((*axis)->cr, 2) - pow((*axis)->ci, 2) + (*axis)->xr;
