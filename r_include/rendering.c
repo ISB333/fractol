@@ -25,8 +25,8 @@ void	convert_values(double x, double y, t_coord **axis, float zoom)
 	// Scale 
 	if ((*axis)->x_zoom || (*axis)->y_zoom)
 	{
-		(*axis)->xr = x / 500 * zoom + ((*axis)->x_zoom - (WIDTH / 2) / 500);
-		(*axis)->yi = y / 500 * zoom + ((*axis)->y_zoom - (HEIGHT / 2) / 500);
+		(*axis)->xr = x / 500 * zoom + (((*axis)->x_zoom - (WIDTH / 2)) / 500);
+		(*axis)->yi = y / 500 * zoom + (((*axis)->y_zoom - (HEIGHT / 2)) / 500);
 	}
 	else
 	{
