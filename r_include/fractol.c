@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/28 11:02:01 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/29 12:04:00 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	d = param;
 	if (keydata.key == 256)
 		mlx_close_window(d->mlx);
+	if (keydata.key == 262)
+		d->axis->x_shift += 0.5 * d->axis->zoom;
+	if (keydata.key == 263)
+		d->axis->x_shift -= 0.5 * d->axis->zoom;
+	if (keydata.key == 264)
+		d->axis->y_shift += 0.5 * d->axis->zoom;
+	if (keydata.key == 265)
+		d->axis->y_shift -= 0.5 * d->axis->zoom;
+	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
 /*
@@ -44,9 +53,11 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 
 	d = param;
 	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
-	printf("zoom * %d\nxdelta = %f\nydelta = %f\n", ++i, xdelta, ydelta);
+	printf("zoom * %d = %f\nxdelta = %f\nydelta = %f\n", ++i, d->axis->zoom, xdelta, ydelta);
 	printf("y mouse = %d\nx mouse = %d\n", d->axis->x_zoom, d->axis->y_zoom);
-	d->axis->zoom *= 0.9;
+	d->axis->zoom *= 0.95;
+	d->axis->x_zoom -= WIDTH / 2;
+	d->axis->y_zoom -= HEIGHT / 2;
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 

@@ -23,16 +23,9 @@ void	convert_values(double x, double y, t_coord **axis, float zoom)
 	y -= (HEIGHT / 2);
 
 	// Scale 
-	if ((*axis)->x_zoom || (*axis)->y_zoom)
-	{
-		(*axis)->xr = x / 500 * zoom + (((*axis)->x_zoom - (WIDTH / 2)) / 500);
-		(*axis)->yi = y / 500 * zoom + (((*axis)->y_zoom - (HEIGHT / 2)) / 500);
-	}
-	else
-	{
-		(*axis)->xr = x / 500;
-		(*axis)->yi = y / 500;
-	}
+	//if x_zoom > Width / 2 + if y_zoom > Height / 2
+	(*axis)->xr = ((x / 500) * zoom) + (*axis)->x_shift;
+	(*axis)->yi = ((y / 500) * zoom) + (*axis)->y_shift;
 }
 
 uint32_t shaders_to100(int startcolor, int endcolor, double len)
