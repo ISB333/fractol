@@ -23,14 +23,14 @@ void	convert_values(double x, double y, t_coord **axis, float zoom)
 	y -= (HEIGHT / 2);
 
 	// Scale 
+	if ((*axis)->x_zoom || (*axis)->y_zoom)
+	{
+		(*axis)->xr += ((*axis)->x_zoom - WIDTH / 2) / 500;
+		(*axis)->yi += ((*axis)->y_zoom - HEIGHT / 2) / 500;
+	}
 	//if x_zoom > Width / 2 + if y_zoom > Height / 2
 	(*axis)->xr = ((x / 500) * zoom) + (*axis)->x_shift;
 	(*axis)->yi = ((y / 500) * zoom) + (*axis)->y_shift;
-	if ((*axis)->x_zoom || (*axis)->y_zoom)
-	{
-		(*axis)->xr += ((*axis)->x_zoom - WIDTH / 2) / 500 * zoom;
-		(*axis)->yi += ((*axis)->y_zoom - HEIGHT / 2) / 500 * zoom;
-	}
 }
 
 uint32_t shaders_to100(int startcolor, int endcolor, double len)
@@ -39,7 +39,7 @@ uint32_t shaders_to100(int startcolor, int endcolor, double len)
     int new[3];
     int newcolor;
 
-	len *= 2.55;
+	len *= 1.55;
     increment[0] = (double)((R(endcolor)) - (R(startcolor))) / len;
     increment[1] = (double)((G(endcolor)) - (G(startcolor))) / len;
     increment[2] = (double)((B(endcolor)) - (B(startcolor))) / len;

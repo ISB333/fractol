@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/29 14:47:13 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/29 14:53:52 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
 	printf("zoom * %d = %f\nxdelta = %f\nydelta = %f\n", ++i, d->axis->zoom, xdelta, ydelta);
 	printf("y mouse = %d\nx mouse = %d\n", d->axis->x_zoom, d->axis->y_zoom);
-	d->axis->zoom *= 0.95;
-	d->axis->x_zoom -= WIDTH / 2;
-	d->axis->y_zoom -= HEIGHT / 2;
+	d->axis->zoom *= 0.9;
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
