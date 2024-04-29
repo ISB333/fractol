@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/29 12:04:00 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/29 14:47:13 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == 256)
 		mlx_close_window(d->mlx);
 	if (keydata.key == 262)
-		d->axis->x_shift += 0.5 * d->axis->zoom;
+		d->axis->x_shift += 0.3 * d->axis->zoom;
 	if (keydata.key == 263)
-		d->axis->x_shift -= 0.5 * d->axis->zoom;
+		d->axis->x_shift -= 0.3 * d->axis->zoom;
 	if (keydata.key == 264)
-		d->axis->y_shift += 0.5 * d->axis->zoom;
+		d->axis->y_shift += 0.3 * d->axis->zoom;
 	if (keydata.key == 265)
-		d->axis->y_shift -= 0.5 * d->axis->zoom;
+		d->axis->y_shift -= 0.3 * d->axis->zoom;
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
