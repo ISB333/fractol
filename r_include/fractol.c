@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/29 14:53:52 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/30 12:33:46 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	d = param;
 	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
 	printf("zoom * %d = %f\nxdelta = %f\nydelta = %f\n", ++i, d->axis->zoom, xdelta, ydelta);
-	printf("y mouse = %d\nx mouse = %d\n", d->axis->x_zoom, d->axis->y_zoom);
-	d->axis->zoom *= 0.9;
+	if (ydelta == 1.)
+		d->axis->zoom *= 0.9;
+	else if (ydelta == -1.)
+		d->axis->zoom *= 1.1;
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
@@ -68,13 +70,19 @@ int	hook_init(t_data *d)
 
 ////// MANDATORY //////
 /*
-	-1- Zoom & Dezoom (following mouse)
-		- Scroll 5%
-		- Get x, y => new 0
+	-1- Graphics
+		-1.1- Optimizing
+		-1.2- Multi-colors
+		
+
 	-2- Differents Sets
 		-2.1- Julia Sets (Presets + argv given)
 		-2.2- Nova Fractals sets
 			- https://rotgers.io/posts/nova-fractals/
+	-3- Optimize rendering
+		-3.1- Tile Rendering for shifting
+		-3.2- Store every stable numbers, when zooming if (n root is the same == Stable)
+		https://cglearn.eu/pub/advanced-computer-graphics/fractal-rendering
 */
 
 int32_t	main(int argc, char *argv[])

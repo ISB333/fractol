@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/29 11:56:01 by isb3             ###   ########.fr       */
+/*   Updated: 2024/04/30 12:40:16 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[]);
 int		put_pxl(mlx_image_t *image, t_coord **axis, float zoom);
 int		complex_calc(char set, t_coord **axis);
 
+void	convert_to_axis(double x, double y, t_coord **axis, float zoom);
 int		error(void);
 int		ff(t_data *d, t_coord *axis);
 void	command_set(char *msg);

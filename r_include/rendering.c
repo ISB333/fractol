@@ -12,45 +12,48 @@
 
 #include "fractol.h"
 
-// int32_t	pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-// {
-// 	return (r << 24 | g << 16 | b << 8 | a);
-// }
+/*
 
-void	convert_values(double x, double y, t_coord **axis, float zoom)
+
+*/
+
+uint32_t glitch_shaders(int startcolor, int endcolor, double len, int pix)
 {
-	x -= (WIDTH / 2);
-	y -= (HEIGHT / 2);
+    double increment[3];
+    int new[3];
+    int newcolor;
 
-	// Scale 
-	if ((*axis)->x_zoom || (*axis)->y_zoom)
-	{
-		(*axis)->xr += ((*axis)->x_zoom - WIDTH / 2) / 500;
-		(*axis)->yi += ((*axis)->y_zoom - HEIGHT / 2) / 500;
-	}
-	//if x_zoom > Width / 2 + if y_zoom > Height / 2
-	(*axis)->xr = ((x / 500) * zoom) + (*axis)->x_shift;
-	(*axis)->yi = ((y / 500) * zoom) + (*axis)->y_shift;
+    increment[0] = (double)((R(endcolor)) - (R(startcolor)) / len);
+    increment[1] = (double)((G(endcolor)) - (G(startcolor)) / len);
+    increment[2] = (double)((B(endcolor)) - (B(startcolor)) / len);
+
+    new[0] = (R(startcolor)) + round(pix * increment[0]);
+    new[1] = (G(startcolor)) + round(pix * increment[1]);
+    new[2] = (B(startcolor)) + round(pix * increment[2]);
+
+    newcolor = RGB(new[0], new[1], new[2]);
+
+    return (newcolor);
 }
 
-uint32_t shaders_to100(int startcolor, int endcolor, double len)
+uint32_t shaders1(int startcolor, int endcolor, double len, int pix)
 {
     double increment[3];
     int new[3];
     int newcolor;
 
 	len *= 1.55;
-    increment[0] = (double)((R(endcolor)) - (R(startcolor))) / len;
-    increment[1] = (double)((G(endcolor)) - (G(startcolor))) / len;
-    increment[2] = (double)((B(endcolor)) - (B(startcolor))) / len;
+    increment[0] = (double)(218 - 204);
+	// printf("R = %f\n", increment[0]);
+    increment[1] = (double)((222 - 5));
+	// printf("G = %f\n", increment[1]);
+    increment[2] = (double)(23 - 5);
+	// printf("B = %f\n", increment[2]);
 
-    // new[0] = (R(startcolor)) + round(pix * increment[0]);
-    // new[1] = (G(startcolor)) + round(pix * increment[1]);
-    // new[2] = (B(startcolor)) + round(pix * increment[2]);
-
-    new[0] = (R(startcolor)) + round(increment[0]);
-    new[1] = (G(startcolor)) + round(increment[1]);
-    new[2] = (B(startcolor)) + round(increment[2]);
+    new[0] = (204 + round(len * increment[0]));
+    new[1] = (5 + round(len * increment[1]));
+    new[2] = (5 + round(len * increment[2]));
+	// printf("%d, %d, %d\n", new[0], new[1], new[2]);
 
     newcolor = RGB(new[0], new[1], new[2]);
 
@@ -59,14 +62,10 @@ uint32_t shaders_to100(int startcolor, int endcolor, double len)
 
 uint32_t	shaders(float instability, uint32_t y)
 {
-	// if (instability <= 20)
-	// 	return (shaders_to33(0x360000FF, 0x4CAF50FF, instability));
-	// else if (instability <= 40)
-	// else
-	if (y > 1)
-		return (shaders_to100(0xF400FFFF, 0xFF0000FF, instability));
+	if (instability)
+		return (shaders1(0xF400FFFF, 0xFF0000FF, instability, y));
 	else
-		return (shaders_to100(0x000000FF, 0xA100A1FF, instability));
+		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
 }
 
 int put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
@@ -82,16 +81,13 @@ int put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
 		x = 0;
 		while (x < WIDTH)
 		{
-			convert_values((double)x, (double)y, axis, zoom);
+			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
 			if (!instability)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
 			{
-				if ((*axis)->it > 0)
-					shade = shaders((double)instability, (*axis)->it);
-				else
-					shade = shaders((double)instability, (*axis)->it);
+				shade = shaders((double)instability, y);
 				mlx_put_pixel(image, x, y, shade);
 			}
 			x++;
