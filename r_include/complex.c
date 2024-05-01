@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/01 11:27:10 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/01 11:51:26 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,16 @@ int	mandelbrot(double r, t_coord **axis)
 {
 	int	it;
 
-	// f() = (0 + 0i)^2 + (x + yi)
-
 	it = -1;
 	(*axis)->cr = 0;
-	(*axis)->ci = 0                                              ;
+	(*axis)->ci = 0;
 	while (++it < 20)
 	{
 		r = pow((*axis)->cr, 2) - pow((*axis)->ci, 2) + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
 		(*axis)->cr = r;
-		// printf("%f\n", sin((*axis)->ci));
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 			return (it);
-		// if (pow((*axis)->cr, 2) >= 2 || pow((*axis)->ci, 2) >= 2)
-		// 	return (it);
 	}
 	if (it == 20)
 		return (0);
@@ -108,8 +103,6 @@ int	mandelbrot(double r, t_coord **axis)
 int	julia(double r, t_coord **axis)
 {
 	int	it;
-
-	// f() = (x + yi)^2 + (cr * ci)
 
 	it = -1;
 	while (++it < 100)

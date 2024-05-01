@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/04/29 11:56:45 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/01 11:59:17 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 	*axis = malloc(sizeof(t_coord));
 	if (*axis)
 	{
-		if (!ft_strcmp("Mandelbrot", argv[1]) || !ft_strcmp("mandelbrot", argv[1]))
+		if (!ft_strcmp("Mandelbrot", argv[1]) \
+			|| !ft_strcmp("mandelbrot", argv[1]))
 			(*axis)->set = 'm';
-		else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))	
+		else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
 		{
 			if (argv[2] && argv[2][0] == '1' && !argv[2][1])
 			{
@@ -51,7 +52,8 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 			else
 				return (NULL);
 		}
-		else if (!ft_strcmp("Burning Ship", argv[1]) || !ft_strcmp("burning", argv[1]))
+		else if (!ft_strcmp("Burning Ship", argv[1]) \
+				|| !ft_strcmp("burning", argv[1]))
 		{
 			(*axis)->set = 'b';
 			(*axis)->cr = -1.476;
