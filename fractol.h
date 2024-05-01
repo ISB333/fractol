@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/04/30 12:40:16 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/01 11:42:19 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <memory.h>
-# define WIDTH 1500
-# define HEIGHT 1000
+# define WIDTH 800
+# define HEIGHT 800
 # define R(a) (a) >> 16
 # define G(a) ((a) >> 8) & 0xFF
 # define B(a) (a) & 0xFF
