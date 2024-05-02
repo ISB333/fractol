@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/02 11:07:19 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 13:42:08 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
 // 	return (0);
 // }
 
-uint32_t	mandelbrot(double r, t_coord **axis)
+double	mandelbrot(double r, t_coord **axis)
 {
 	int	it;
 
@@ -93,7 +93,8 @@ uint32_t	mandelbrot(double r, t_coord **axis)
 		(*axis)->cr = r;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			return (it);
+			//if shaders == glitch returns it
+			return((float)it - logl(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
 		}
 	}
 	if (it == 50)
@@ -102,7 +103,7 @@ uint32_t	mandelbrot(double r, t_coord **axis)
 		return (it);
 }
 
-uint32_t	julia(double r, t_coord **axis)
+double	julia(double r, t_coord **axis)
 {
 	int	it;
 
@@ -113,12 +114,12 @@ uint32_t	julia(double r, t_coord **axis)
 		(*axis)->yi = (*axis)->xr * (*axis)->yi * 2 + (*axis)->ci;
 		(*axis)->xr = r;
 		if (pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4)
-			return (it);
+			return((float)it - logl(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
 	}
 	return (0);
 }
 
-uint32_t	complex_calc(char set, t_coord **axis)
+double	complex_calc(char set, t_coord **axis)
 {
 	if (set == 'j')
 		return (julia(0, axis));

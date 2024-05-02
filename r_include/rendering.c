@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/02 12:35:48 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 13:41:24 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 uint32_t	shaders1(int startcolor, int endcolor, double instability, t_coord *axis)
 {
 	double	increment[3];
-	double	smooth;
 	int		new[3];
 	int		newcolor;
 	
-	smooth = (float)instability - log2(log(pow(axis->cr, 2) + pow(axis->ci, 2)) / log(2));
-	increment[0] = (double)((R(endcolor)) - (R(startcolor)) / smooth);
-	increment[1] = (double)((G(endcolor)) - (G(startcolor)) / smooth);
-	increment[2] = (double)((B(endcolor)) - (B(startcolor)) / smooth);
+	increment[0] = (double)((R(endcolor)) - (R(startcolor)) / instability);
+	increment[1] = (double)((G(endcolor)) - (G(startcolor)) / instability);
+	increment[2] = (double)((B(endcolor)) - (B(startcolor)) / instability);
 	new[0] = (R(startcolor)) + round(increment[0]);
 	new[1] = (G(startcolor)) + round(increment[1]);
 	new[2] = (B(startcolor)) + round(increment[2]);
@@ -52,15 +50,14 @@ uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 {
 	if (instability)
 		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
-		// return (shaders1(0xF400FFFF, 0xFF0000FF, instability, y));
 	else
-		return (shaders1(0xF400FFFF, 0xFF0000FF, instability, axis));
-		// return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
+		return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
+		// return (shaders1(0xF400FFFF, 0xFF0000FF, instability, axis));
 }
 
 int	stability_storage(t_coord **axis, float zoom)
 {
-	uint32_t	instability;
+	double	instability;
 	uint32_t	x;
 	uint32_t	y;
 
@@ -79,7 +76,7 @@ int	stability_storage(t_coord **axis, float zoom)
 	return (0);
 }
 
-int	put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
+int	put_pxl(mlx_image_t *image, t_coord **axis)
 {
 	uint32_t	shade;
 	uint32_t	x;
