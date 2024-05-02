@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/02 11:20:20 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 11:57:57 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_coord
 	double	temp;
 	int		it;
 	double	zoom;
-	double	x_shift;
+	uint32_t	x_shift;
 	double	y_shift;
 	int32_t	x_zoom;
 	int32_t	y_zoom;
@@ -60,6 +60,7 @@ typedef struct s_data
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
 
+int	stability_storage(t_coord **axis, float zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis, float zoom);
 uint32_t	complex_calc(char set, t_coord **axis);
 

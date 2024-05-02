@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/02 11:12:49 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 11:45:16 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 	(*axis)->zoom = 1;
 	(*axis)->x_zoom = 0;
 	(*axis)->y_zoom = 0;
-	(*axis)->x_shift = 0;
-	(*axis)->y_shift = 0;
+	(*axis)->x_shift = WIDTH;
+	(*axis)->y_shift = HEIGHT;
 	return (*axis);
 }

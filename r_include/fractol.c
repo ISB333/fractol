@@ -6,11 +6,30 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/02 10:59:55 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 12:39:11 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	shift_storage(t_data *d)
+{
+	uint32_t	x;
+	uint16_t	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = WIDTH;
+		while (x > d->axis->x_shift)
+		{
+            // printf("x: %u, y: %u, x_shift: %u\n", x, y, d->axis->x_shift);
+			d->axis->storage[y][x] = d->axis->storage[y][x - d->axis->x_shift];
+			x--;
+		}
+		y++;
+	}
+}
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
@@ -20,13 +39,15 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == 256)
 		mlx_close_window(d->mlx);
 	if (keydata.key == 262)
-		d->axis->x_shift += 0.3 * d->axis->zoom;
+		d->axis->x_shift = 0.3 * 300 * d->axis->zoom;
 	if (keydata.key == 263)
-		d->axis->x_shift -= 0.3 * d->axis->zoom;
+		d->axis->x_shift -= 0.3 * d->axis->zoom * 300;
 	if (keydata.key == 264)
-		d->axis->y_shift -= 0.3 * d->axis->zoom;
+		d->axis->y_shift -= 0.3 * d->axis->zoom * 300;
 	if (keydata.key == 265)
-		d->axis->y_shift += 0.3 * d->axis->zoom;
+		d->axis->y_shift += 0.3 * d->axis->zoom * 300;
+	shift_storage(d);
+	stability_storage(&d->axis, d->axis->zoom);
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
@@ -42,6 +63,9 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 		d->axis->zoom *= 0.9;
 	else if (ydelta == -1.)
 		d->axis->zoom *= 1.1;
+	d->axis->x_shift = WIDTH;
+	d->axis->y_shift = HEIGHT;
+	stability_storage(&d->axis, d->axis->zoom);
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
@@ -81,6 +105,7 @@ int32_t	main(int argc, char *argv[])
 			{
 				d->axis = axis;
 				hook_init(d);
+				stability_storage(&d->axis, d->axis->zoom);
 				put_pxl(d->image, &axis, 1);
 				if (mlx_image_to_window(d->mlx, d->image, 0, 0) == -1)
 					return (mlx_close_window(d->mlx), error());

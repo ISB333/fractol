@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/02 11:33:41 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 12:35:48 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,27 @@ uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 		// return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
 }
 
-int	stability_storage(mlx_image_t *image, t_coord **axis, float zoom)
+int	stability_storage(t_coord **axis, float zoom)
 {
 	uint32_t	instability;
 	uint32_t	x;
 	uint32_t	y;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < (*axis)->y_shift)
 	{
-		x = 0;
-		while (x < WIDTH)
+		x = -1;
+		while (++x <= (*axis)->x_shift)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
-			(*axis)->storage[y][x++] = instability;
+			(*axis)->storage[y][x] = instability;
 		}
 		y++;
 	}
+	return (0);
 }
+
 int	put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
 {
 	uint32_t	shade;
@@ -86,8 +88,8 @@ int	put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		x = -1;
+		while (++x < WIDTH)
 		{
 			if (!(*axis)->storage[y][x])
 				mlx_put_pixel(image, x, y, 0x000000FF);
@@ -96,7 +98,6 @@ int	put_pxl(mlx_image_t *image, t_coord **axis, float zoom)
 				shade = shaders((double)(*axis)->storage[y][x], (double)x, (double)y, *axis);
 				mlx_put_pixel(image, x, y, shade);
 			}
-			x++;
 			// storage(x, y, instability, axis);
 		}
 		y++;
