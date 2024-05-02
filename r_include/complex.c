@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/01 11:51:26 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 11:07:19 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,30 @@ f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
 // 	return (0);
 // }
 
-int	mandelbrot(double r, t_coord **axis)
+uint32_t	mandelbrot(double r, t_coord **axis)
 {
 	int	it;
 
 	it = -1;
 	(*axis)->cr = 0;
 	(*axis)->ci = 0;
-	while (++it < 20)
+	while (++it < 50)
 	{
 		r = pow((*axis)->cr, 2) - pow((*axis)->ci, 2) + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
 		(*axis)->cr = r;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
+		{
 			return (it);
+		}
 	}
-	if (it == 20)
+	if (it == 50)
 		return (0);
 	else
 		return (it);
 }
 
-int	julia(double r, t_coord **axis)
+uint32_t	julia(double r, t_coord **axis)
 {
 	int	it;
 
@@ -116,7 +118,7 @@ int	julia(double r, t_coord **axis)
 	return (0);
 }
 
-int	complex_calc(char set, t_coord **axis)
+uint32_t	complex_calc(char set, t_coord **axis)
 {
 	if (set == 'j')
 		return (julia(0, axis));

@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/01 12:04:21 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/02 10:59:55 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ int	hook_init(t_data *d)
 
 ////// TODO //////
 /*
-	-1- Graphics
-		-1.1- Optimizing
-		https://cglearn.eu/pub/advanced-computer-graphics/fractal-rendering	
-
 	-2- Differents Sets
 		-2.1- Julia Sets (Presets + argv given)
 		-2.2- Nova Fractals sets
@@ -67,6 +63,7 @@ int	hook_init(t_data *d)
 		-3.2- Store every stable numbers, when zooming if (n root is the same == Stable)
 		https://cglearn.eu/pub/advanced-computer-graphics/fractal-rendering
 	-4- Color Shift
+		https://cglearn.eu/pub/advanced-computer-graphics/fractal-rendering	
 */
 
 int32_t	main(int argc, char *argv[])
@@ -82,7 +79,6 @@ int32_t	main(int argc, char *argv[])
 		{
 			if (init_img(&d))
 			{
-				printf("AAAAAAAA\n");
 				d->axis = axis;
 				hook_init(d);
 				put_pxl(d->image, &axis, 1);
