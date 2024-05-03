@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/02 13:42:08 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/03 11:52:01 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,15 @@ double	mandelbrot(double r, t_coord **axis)
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
 			//if shaders == glitch returns it
-			return((float)it - logl(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
+
+			// return(it);
+			// return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
+			return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
+			// return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
+			// return((float)it - log2(log((*axis)->cr + (*axis)->ci) / log(2)));
 		}
 	}
-	if (it == 50)
-		return (0);
-	else
-		return (it);
+	return (0);
 }
 
 double	julia(double r, t_coord **axis)

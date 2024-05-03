@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/02 13:41:24 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/03 12:46:38 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix)
 	int		new[3];
 	int		newcolor;
 
-	len = sin(len);
-	pix -= HEIGHT / 2;
 	increment[0] = (double)((R(endcolor)) - (R(startcolor)) / len);
 	increment[1] = (double)((G(endcolor)) - (G(startcolor)) / len);
 	increment[2] = (double)((B(endcolor)) - (B(startcolor)) / len);
@@ -48,11 +46,11 @@ uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix)
 
 uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 {
-	if (instability)
+	if (!instability)
 		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
 	else
-		return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
-		// return (shaders1(0xF400FFFF, 0xFF0000FF, instability, axis));
+		return (shaders1(0xF400FFFF, 0xFF0000FF, instability, axis));
+		// return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
 }
 
 int	stability_storage(t_coord **axis, float zoom)
@@ -60,12 +58,19 @@ int	stability_storage(t_coord **axis, float zoom)
 	double	instability;
 	uint32_t	x;
 	uint32_t	y;
+	uint32_t	w;
+	uint32_t	h;
 
 	y = 0;
-	while (y < (*axis)->y_shift)
+	if ((*axis)->x_shift > 0)
+		w = (*axis)->x_shift;
+	else
+		w = WIDTH;
+	h = HEIGHT;
+	while (y < h)
 	{
 		x = -1;
-		while (++x <= (*axis)->x_shift)
+		while (++x <= w)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
@@ -81,7 +86,9 @@ int	put_pxl(mlx_image_t *image, t_coord **axis)
 	uint32_t	shade;
 	uint32_t	x;
 	uint32_t	y;
+	// static int i = 0;
 
+	// i++;
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -99,5 +106,6 @@ int	put_pxl(mlx_image_t *image, t_coord **axis)
 		}
 		y++;
 	}
+	// printf("%d\n", i);
 	return (0);
 }
