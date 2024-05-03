@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/03 12:46:38 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/03 13:20:46 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,17 @@ int	stability_storage(t_coord **axis, float zoom)
 	uint32_t	h;
 
 	y = 0;
-	if ((*axis)->x_shift > 0)
-		w = (*axis)->x_shift;
-	else
+	// if ((*axis)->x_shift > 0)
+		// w = (*axis)->x_shift;
+	// else
 		w = WIDTH;
 	h = HEIGHT;
 	while (y < h)
 	{
-		x = -1;
+		if ((*axis)->x_shift > 0)
+			x = WIDTH - (*axis)->x_shift;
+		else
+			x = -1;
 		while (++x <= w)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);

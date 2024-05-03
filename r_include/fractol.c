@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/03 12:59:50 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/03 13:19:52 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,24 @@ void	shift_storage(t_data *d)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		x = WIDTH;
-		while (--x > d->axis->x_shift)
+		if (d->axis->x_shift > 0)
 		{
-            // printf("x: %u, y: %u, x_shift: %u\n", x, y, d->axis->x_shift);
-			d->axis->storage[y][x] = d->axis->storage[y][x - d->axis->x_shift];
-			// x--;
+		// 	x = WIDTH;
+		// 	while (--x > d->axis->x_shift)
+		// 	{
+		// 		// printf("x: %u, y: %u, x_shift: %u\n", x, y, d->axis->x_shift);
+		// 		d->axis->storage[y][x] = d->axis->storage[y][x - d->axis->x_shift];
+		// 		// x--;
+		// 	}
+		// }
+		// else
+		// {
+			x = -1;
+			while (++x < WIDTH - d->axis->x_shift)
+			{
+				// printf("x: %u, y: %u, x_shift: %u\n", x, y, d->axis->x_shift);
+				d->axis->storage[y][x] = d->axis->storage[y][x + d->axis->x_shift];
+			}
 		}
 		y++;
 	}
@@ -44,7 +56,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == 262)
 			d->axis->x_shift = 90;
 		if (keydata.key == 263)
-			d->axis->x_shift -= 0.3 * d->axis->zoom * 300;
+			d->axis->x_shift = 90;
 		if (keydata.key == 264)
 			d->axis->y_shift -= 0.3 * d->axis->zoom * 300;
 		if (keydata.key == 265)
