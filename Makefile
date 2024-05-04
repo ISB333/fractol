@@ -23,7 +23,7 @@ CC = cc
 LIBMLX := ./MLX42
 LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g3
 SRCS := ./r_include/fractol.c ./r_include/complex.c ./r_include/rendering.c \
-		./r_include/utils.c ./r_include/init.c
+		./r_include/utils.c ./r_include/init.c \
 
 OBJDIR := .obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)

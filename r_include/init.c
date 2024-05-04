@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/04 11:28:10 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/04 13:29:55 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ t_data	*init_img(t_data **d)
 }
 void	reinit_shift(t_data **d)
 {
-	d->axis->right_shift = 0;
-	d->axis->left_shift = 0;
-	d->axis->up_shift = 0;
-	d->axis->down_shift = 0;
+	(*d)->axis->right_shift = 0;
+	(*d)->axis->left_shift = 0;
+	(*d)->axis->up_shift = 0;
+	(*d)->axis->down_shift = 0;
 }
 
 t_coord	*parse_coord(t_coord **axis, char *argv[])
@@ -78,6 +78,8 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 	(*axis)->zoom = 1;
 	(*axis)->x_zoom = 0;
 	(*axis)->y_zoom = 0;
+	(*axis)->x_shift = 0;
+	(*axis)->y_shift = 0;
 	(*axis)->right_shift = 0;
 	(*axis)->left_shift = 0;
 	(*axis)->up_shift = 0;
