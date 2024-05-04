@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/03 13:20:46 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/04 11:24:45 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 		// return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
 }
 
-int	stability_storage(t_coord **axis, float zoom)
+int	recalc_instability(t_coord **axis, float zoom)
 {
 	double	instability;
 	uint32_t	x;
@@ -62,18 +62,39 @@ int	stability_storage(t_coord **axis, float zoom)
 	uint32_t	h;
 
 	y = 0;
-	// if ((*axis)->x_shift > 0)
-		// w = (*axis)->x_shift;
-	// else
+	if ((*axis)->right_shift)
+		w = (*axis)->right_shift;
+	else
 		w = WIDTH;
 	h = HEIGHT;
 	while (y < h)
 	{
-		if ((*axis)->x_shift > 0)
-			x = WIDTH - (*axis)->x_shift;
+		if ((*axis)->left_shift > 0)
+			x = WIDTH - (*axis)->left_shift;
 		else
 			x = -1;
 		while (++x <= w)
+		{
+			convert_to_axis((double)x, (double)y, axis, zoom);
+			instability = complex_calc((*axis)->set, axis);
+			(*axis)->storage[y][x] = instability;
+		}
+		y++;
+	}
+	return (0);
+}
+
+int	store_instability(t_coord **axis, float zoom)
+{
+	double	instability;
+	uint32_t	x;
+	uint32_t	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);

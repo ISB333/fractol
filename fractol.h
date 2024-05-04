@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/03 13:08:11 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/04 11:27:23 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,21 @@
 
 typedef struct s_coord
 {
-	char	set;
-	double	xr;
-	double	yi;
-	double	cr;
-	double	ci;
-	double	temp;
-	int		it;
-	double	zoom;
-	uint32_t	x_shift;
-	double	y_shift;
-	int32_t	x_zoom;
-	int32_t	y_zoom;
-	double	storage[HEIGHT][WIDTH];
+	char		set;
+	double		xr;
+	double		yi;
+	double		cr;
+	double		ci;
+	double		temp;
+	int			it;
+	double		zoom;
+	uint32_t	up_shift;
+	uint32_t	down_shift;
+	uint32_t	left_shift;
+	uint32_t	right_shift;
+	int32_t		x_zoom;
+	int32_t		y_zoom;
+	double		storage[HEIGHT][WIDTH];
 }	t_coord;
 
 typedef struct s_data
@@ -59,10 +61,12 @@ typedef struct s_data
 
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
+void		reinit_shift(t_data **d);
 
-int	stability_storage(t_coord **axis, float zoom);
+int			store_instability(t_coord **axis, float zoom);
+int			recalc_instability(t_coord **axis, float zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis);
-double	complex_calc(char set, t_coord **axis);
+double		complex_calc(char set, t_coord **axis);
 
 void		convert_to_axis(double x, double y, t_coord **axis, float zoom);
 int			error(void);
