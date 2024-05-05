@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/05 13:26:03 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/05 18:14:38 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	hook_init(t_data *d)
 /*
 	-1- Graphics Optimization
 		https://mandelbrowser.y0.pl/tutorial/computing.html#coloring
+		https://www.youtube.com/watch?v=EbanExb75mc
 	-2- Differents Sets
 		-2.1- Julia Sets (Presets + argv given)
 		-2.2- Burning Ship
