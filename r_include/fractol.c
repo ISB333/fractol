@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/04 13:41:39 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/05 13:26:03 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,29 @@
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_data	*d;
-	static int i = 0;
+	static int	i = 0;
+	t_data		*d;
 
 	d = param;
 	if (!(++i % 2))
 	{
 		if (keydata.key == 256)
 			mlx_close_window(d->mlx);
-		// if (keydata.key == 262)
-		// {
-		// 	d->axis->right_shift += 90;
-		// 	rshift_storage(d);
-		// }
-		// if (keydata.key == 263)
-		// {
-		// 	d->axis->left_shift += 90;
-		// 	lshift_storage(d);
-		// }
-		// if (keydata.key == 264)
-		// {
-		// 	d->axis->down_shift += 90;
-		// 	dshift_storage(d);
-		// }
-		// if (keydata.key == 265)
-		// {
-		// 	d->axis->up_shift += 90;
-		// 	ushift_storage(d);
-		// }
 		if (keydata.key == 262)
-			d->axis->x_shift -= 0.3 * d->axis->zoom;
+			rlshift_storage(d, 'l');
 		if (keydata.key == 263)
-			d->axis->x_shift += 0.3 * d->axis->zoom;
+			rlshift_storage(d, 'r');
 		if (keydata.key == 264)
-			d->axis->y_shift += 0.3 * d->axis->zoom;
+			dushift_storage(d, 'u');
 		if (keydata.key == 265)
-			d->axis->y_shift -= 0.3 * d->axis->zoom;
-		printf("%d\n", i);
-		store_instability(&d->axis, d->axis->zoom);
+			dushift_storage(d, 'd');
 		put_pxl(d->image, &d->axis);
 	}
 }
 
 void	scroll_hook(double xdelta, double ydelta, void *param)
 {
-	static int	i = 0;
+	static int	i;
 	t_data	*d;
 
 	d = param;
@@ -69,7 +47,6 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	else if (ydelta == -1.)
 		d->axis->zoom *= 1.1;
 	store_instability(&d->axis, d->axis->zoom);
-	// recalc_instability(&d->axis, d->axis->zoom);
 	put_pxl(d->image, &d->axis);
 }
 

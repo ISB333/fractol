@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/04 13:28:25 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/05 11:59:28 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void	convert_to_axis(double x, double y, t_coord **axis, float zoom)
 {
 	x -= (WIDTH / 2);
 	y -= (HEIGHT / 2);
-	y *= -1;
 	if ((*axis)->x_zoom || (*axis)->y_zoom)
 	{
 		(*axis)->xr += ((*axis)->x_zoom - WIDTH / 2) / 300;
 		(*axis)->yi += ((*axis)->y_zoom - HEIGHT / 2) / 300;
-		(*axis)->yi *= -1;
 	}
 	(*axis)->xr = ((x / 300) * zoom) + (*axis)->x_shift;
 	(*axis)->yi = ((y / 300) * zoom) + (*axis)->y_shift;

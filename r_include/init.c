@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/04 13:29:55 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/05 11:52:44 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ t_data	*init_img(t_data **d)
 			return (mlx_close_window((*d)->mlx), error(), NULL);
 	}
 	return (*d);
-}
-void	reinit_shift(t_data **d)
-{
-	(*d)->axis->right_shift = 0;
-	(*d)->axis->left_shift = 0;
-	(*d)->axis->up_shift = 0;
-	(*d)->axis->down_shift = 0;
 }
 
 t_coord	*parse_coord(t_coord **axis, char *argv[])
@@ -56,10 +49,16 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 				(*axis)->cr = -1.476;
 				(*axis)->ci = 0;
 			}
+			// else if (!is_nbr(argv[2][1] && !isnbr(argv[2][2])))
+			// (
+			// 	(*axis)->set = 'j';
+			// 	if (atod(axis, argv[2][1]))
+			// 		return (NULL);
+			// }
 			else
 				return (NULL);
 		}
-		else if (!ft_strcmp("Burning Ship", argv[1]) \
+		else if (!ft_strcmp("Burning", argv[1]) \
 				|| !ft_strcmp("burning", argv[1]))
 		{
 			(*axis)->set = 'b';
@@ -76,13 +75,5 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 			return (NULL);
 	}
 	(*axis)->zoom = 1;
-	(*axis)->x_zoom = 0;
-	(*axis)->y_zoom = 0;
-	(*axis)->x_shift = 0;
-	(*axis)->y_shift = 0;
-	(*axis)->right_shift = 0;
-	(*axis)->left_shift = 0;
-	(*axis)->up_shift = 0;
-	(*axis)->down_shift = 0;
 	return (*axis);
 }

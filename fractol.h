@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/04 13:38:19 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/05 11:51:29 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ typedef struct s_data
 	t_coord		*axis;
 }	t_data;
 
-// typedef struct s_storage
-// {
-// }	t_storage;
-
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
 void		reinit_shift(t_data **d);
@@ -70,10 +66,8 @@ int			recalc_instability(t_coord **axis, float zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis);
 double		complex_calc(char set, t_coord **axis);
 
-// void		rshift_storage(t_data *d);
-// void		lshift_storage(t_data *d);
-// void		dshift_storage(t_data *d);
-// void		ushift_storage(t_data *d);
+void		rlshift_storage(t_data *d, char key);
+void		dushift_storage(t_data *d, char key);
 
 void		convert_to_axis(double x, double y, t_coord **axis, float zoom);
 int			error(void);
