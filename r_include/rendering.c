@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/04 13:29:10 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/06 14:40:32 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,39 @@ uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix)
 
 uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 {
+	int	color1;
+	int	color2;
+
 	if (!instability)
 		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
 	else
-		return (shaders1(0xF400FFFF, 0xFF0000FF, instability, axis));
-		// return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
+	{
+		if (axis->color == 0)
+		{
+			color1 = 0xF400FFFF;
+			color2 = 0xFF0000FF;
+		}
+		else if (axis->color == 1)
+		{
+			color1 = 0x100050FF;
+			color2 = 0xa7e500FF;
+		}
+		else if (axis->color == 2)
+		{
+			color1 = 0xFA0068FF;
+			color2 = 0xFFF700FF;
+		}
+		else
+		{
+			color1 = 0x02008AFF;
+			color2 = 0x00FFFFFF;
+		}
+		// printf("%f\n", instability);
+		// instability = instability - (log2(log(pow(axis->cr, 2) + pow(axis->ci, 2)) - 1) / 2);
+		return (shaders1(color1, color2, instability, axis));
+			// return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
+
+	}
 }
 
 int	store_instability(t_coord **axis, float zoom)
@@ -58,6 +86,7 @@ int	store_instability(t_coord **axis, float zoom)
 	double	instability;
 	uint32_t	x;
 	uint32_t	y;
+	uint32_t	i;
 
 	y = 0;
 	while (y < HEIGHT)

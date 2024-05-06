@@ -14,7 +14,7 @@
 
 NAME = fractol
 HEADERS = -I. -I$(LIBMLX)/include -I./libft
-# DEPFLAGS = -MP -MD
+DEPFLAGS = -MP -MD
 CFLAGS += -Wall -Wextra -Wunreachable-code -ofast -g3 
 CC = cc
 
@@ -28,7 +28,7 @@ SRCS := ./r_include/fractol.c ./r_include/complex.c ./r_include/rendering.c \
 
 OBJDIR := .obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
-# DEPFILES := $(SRCS:%.c=$(OBJDIR)/%.d)
+DEPFILES := $(SRCS:%.c=$(OBJDIR)/%.d)
 
 GREEN = \033[0;92m
 CURRENT_DATE := $(shell date +"%Y-%m-%d %H:%M")

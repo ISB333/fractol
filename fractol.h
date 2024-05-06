@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/05 11:51:29 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/06 14:35:28 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <memory.h>
 # define WIDTH 1200
 # define HEIGHT 800
+# define PIXELS 4
 # define R(a) (a) >> 16
 # define G(a) ((a) >> 8) & 0xFF
 # define B(a) (a) & 0xFF
@@ -36,6 +37,7 @@ typedef struct s_coord
 	double		cr;
 	double		ci;
 	double		temp;
+	int			color;
 	int			it;
 	double		zoom;
 	double		x_shift;
@@ -43,10 +45,6 @@ typedef struct s_coord
 	int32_t		x_zoom;
 	int32_t		y_zoom;
 	double		storage[HEIGHT][WIDTH];
-	uint32_t	up_shift;
-	uint32_t	down_shift;
-	uint32_t	left_shift;
-	uint32_t	right_shift;
 }	t_coord;
 
 typedef struct s_data
@@ -59,7 +57,8 @@ typedef struct s_data
 
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
-void		reinit_shift(t_data **d);
+int			is_nbr(char *str);
+double		ft_atod(char *nptr, t_coord **axis);
 
 int			store_instability(t_coord **axis, float zoom);
 int			recalc_instability(t_coord **axis, float zoom);

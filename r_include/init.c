@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/05 11:52:44 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/06 11:39:44 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 				(*axis)->cr = -1.476;
 				(*axis)->ci = 0;
 			}
-			// else if (!is_nbr(argv[2][1] && !isnbr(argv[2][2])))
-			// (
-			// 	(*axis)->set = 'j';
-			// 	if (atod(axis, argv[2][1]))
-			// 		return (NULL);
-			// }
+			else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
+			{
+				(*axis)->set = 'j';
+				(*axis)->cr = ft_atod(argv[2], axis);
+				(*axis)->ci = ft_atod(argv[3], axis);
+			}
 			else
 				return (NULL);
 		}
@@ -66,11 +66,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 			(*axis)->ci = 0;
 		}
 		else if (!ft_strcmp("Nova", argv[1]) || !ft_strcmp("nova", argv[1]))
-		{
 			(*axis)->set = 'n';
-			(*axis)->cr = 0;
-			(*axis)->ci = 0;
-		}
 		else
 			return (NULL);
 	}

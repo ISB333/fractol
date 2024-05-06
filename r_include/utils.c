@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/05 11:59:28 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/06 14:23:20 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+double	ft_atod(char *nptr, t_coord **axis)
+{
+	double	nbr;
+	int		i;
+	int		sign;
+	int		divider;
+
+	sign = 1;
+	i = 0;
+	nbr = 0;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == 43 || nptr[i] == 45)
+	{
+		if (nptr[i] == 45)
+			sign *= -1;
+		i++;
+	}
+	while (nptr[i])
+	{
+		while (nptr[i] >= '0' && nptr[i] <= '9')
+			nbr = (nbr * 10) + ((nptr[i++]) - 48);
+		if (nptr[i] == '.' || nptr[i] == ',')
+			i++;
+	}
+	nbr *= sign;
+	return (divider = pow(10, i - 2), nbr /= divider);
+}
+
+int	is_nbr(char *str)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = -1;
+	while (str[i])
+		i++;
+	while ((str[++k] >= '0' && str[k] <= '9') || str[k] == '.' || str[k] == ',')
+		;
+	if (k == i)
+		return (0);
+	return (-1);
+}
 
 void	convert_to_axis(double x, double y, t_coord **axis, float zoom)
 {
@@ -44,7 +89,7 @@ int	error(void)
 	return (exit(EXIT_FAILURE), 1);
 }
 
-void	command_set(char *msg)
+void	command_set(char	*msg)
 {
 	ft_putstr_fd(msg, 1);
 	ft_putstr_fd("Choose one the following possibilities :\n\n", 1);
