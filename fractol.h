@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/06 14:35:28 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:22:53 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <memory.h>
+# include <float.h>
 # define WIDTH 1200
 # define HEIGHT 800
-# define PIXELS 4
 # define R(a) (a) >> 16
 # define G(a) ((a) >> 8) & 0xFF
 # define B(a) (a) & 0xFF
@@ -38,13 +38,16 @@ typedef struct s_coord
 	double		ci;
 	double		temp;
 	int			color;
-	int			it;
+	// int			instability;
+	// double		smooth_inst;
 	double		zoom;
 	double		x_shift;
 	double		y_shift;
 	int32_t		x_zoom;
 	int32_t		y_zoom;
-	double		storage[HEIGHT][WIDTH];
+	int 		token;
+	int		storage[HEIGHT][WIDTH];
+	uint32_t		shade[HEIGHT][WIDTH];
 }	t_coord;
 
 typedef struct s_data
@@ -58,12 +61,14 @@ typedef struct s_data
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
-double		ft_atod(char *nptr, t_coord **axis);
+long double		ft_atod(char *nptr);
 
 int			store_instability(t_coord **axis, float zoom);
 int			recalc_instability(t_coord **axis, float zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis);
-double		complex_calc(char set, t_coord **axis);
+int			complex_calc(char set, t_coord **axis);
+uint32_t	shaders(int instability, double x, double y, t_coord *axis);
+
 
 void		rlshift_storage(t_data *d, char key);
 void		dushift_storage(t_data *d, char key);

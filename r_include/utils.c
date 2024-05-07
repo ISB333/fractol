@@ -6,15 +6,15 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/06 14:23:20 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:04:54 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	ft_atod(char *nptr, t_coord **axis)
+long double	ft_atod(char *nptr)
 {
-	double	nbr;
+	long double	nbr;
 	int		i;
 	int		sign;
 	int		divider;
@@ -46,6 +46,8 @@ int	is_nbr(char *str)
 	int	i;
 	int	k;
 
+	if (!str)
+		return (-1);
 	i = 0;
 	k = -1;
 	while (str[i])
@@ -61,13 +63,16 @@ void	convert_to_axis(double x, double y, t_coord **axis, float zoom)
 {
 	x -= (WIDTH / 2);
 	y -= (HEIGHT / 2);
-	if ((*axis)->x_zoom || (*axis)->y_zoom)
-	{
-		(*axis)->xr += ((*axis)->x_zoom - WIDTH / 2) / 300;
-		(*axis)->yi += ((*axis)->y_zoom - HEIGHT / 2) / 300;
-	}
-	(*axis)->xr = ((x / 300) * zoom) + (*axis)->x_shift;
-	(*axis)->yi = ((y / 300) * zoom) + (*axis)->y_shift;
+	// if ((*axis)->x_zoom || (*axis)->y_zoom)
+	// {
+	// 	(*axis)->xr = ((*axis)->x_zoom - WIDTH / 2) / 300 * zoom + ((x / 300) * zoom) + (*axis)->x_shift;
+	// 	(*axis)->yi = ((*axis)->y_zoom - HEIGHT / 2) / 300 * zoom + ((y / 300) * zoom) + (*axis)->y_shift;
+	// }
+	// else
+	// {
+		(*axis)->xr = ((x / 300) * zoom) + (*axis)->x_shift;
+		(*axis)->yi = ((y / 300) * zoom) + (*axis)->y_shift;
+	// }
 }
 
 int	ff(t_data *d, t_coord *axis, int status)

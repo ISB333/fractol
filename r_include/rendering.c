@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/06 14:40:32 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:26:36 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ uint32_t	shaders1(int startcolor, int endcolor, double instability, t_coord *axi
 	increment[2] = (double)((B(endcolor)) - (B(startcolor)) / instability);
 	new[0] = (R(startcolor)) + round(increment[0]);
 	new[1] = (G(startcolor)) + round(increment[1]);
-	new[2] = (B(startcolor)) + round(increment[2]);
+	new[0] = (R(startcolor)) + round(increment[0]);
 	newcolor = RGB(new[0], new[1], new[2]);
 	return (newcolor);
 }
@@ -44,26 +44,27 @@ uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix)
 	return (newcolor);
 }
 
-uint32_t	shaders(double instability, double x, double y, t_coord *axis)
+uint32_t	shaders(int instability, double x, double y, t_coord *axis)
 {
 	int	color1;
 	int	color2;
+	double instab;
 
 	if (!instability)
 		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
 	else
 	{
-		if (axis->color == 0)
+		if ((instability % 4) == 0)
 		{
 			color1 = 0xF400FFFF;
 			color2 = 0xFF0000FF;
 		}
-		else if (axis->color == 1)
+		else if ((instability % 4) == 1)
 		{
 			color1 = 0x100050FF;
 			color2 = 0xa7e500FF;
 		}
-		else if (axis->color == 2)
+		else if ((instability % 4) == 2)
 		{
 			color1 = 0xFA0068FF;
 			color2 = 0xFFF700FF;
@@ -73,21 +74,21 @@ uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 			color1 = 0x02008AFF;
 			color2 = 0x00FFFFFF;
 		}
-		// printf("%f\n", instability);
-		// instability = instability - (log2(log(pow(axis->cr, 2) + pow(axis->ci, 2)) - 1) / 2);
-		return (shaders1(color1, color2, instability, axis));
-			// return (shaders1(0x100050FF, 0xa7e500FF, instability, axis));
+		// instab = ((float)instability - (log2(log(pow(axis->cr, 2) + pow(axis->ci, 2)) - 1) / 2));
 
+		// instab = instability - (log(log(pow(axis->cr, 2) + pow(axis->ci, 2) -(axis->cr + axis->ci)) - 1) / 2);
+		return (shaders1(color1, color2, instability, axis));
 	}
 }
 
 int	store_instability(t_coord **axis, float zoom)
 {
-	double	instability;
+	int	instability;
 	uint32_t	x;
 	uint32_t	y;
 	uint32_t	i;
 
+	i = 0;
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -97,6 +98,7 @@ int	store_instability(t_coord **axis, float zoom)
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
 			(*axis)->storage[y][x] = instability;
+			(*axis)->shade[y][x] = shaders(instability, (double)x, (double)y, *axis);
 		}
 		y++;
 	}
@@ -118,10 +120,7 @@ int	put_pxl(mlx_image_t *image, t_coord **axis)
 			if (!(*axis)->storage[y][x])
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
-			{
-				shade = shaders((double)(*axis)->storage[y][x], (double)x, (double)y, *axis);
-				mlx_put_pixel(image, x, y, shade);
-			}
+				mlx_put_pixel(image, x, y, (*axis)->shade[y][x]);
 		}
 		y++;
 	}

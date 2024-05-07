@@ -6,11 +6,12 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/06 11:39:44 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 12:33:54 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <limits.h>
 
 t_data	*init_img(t_data **d)
 {
@@ -29,6 +30,9 @@ t_data	*init_img(t_data **d)
 
 t_coord	*parse_coord(t_coord **axis, char *argv[])
 {
+	long double	crtemp;
+	long double	citemp;
+
 	*axis = malloc(sizeof(t_coord));
 	if (*axis)
 	{
@@ -52,8 +56,13 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 			else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
 			{
 				(*axis)->set = 'j';
-				(*axis)->cr = ft_atod(argv[2], axis);
-				(*axis)->ci = ft_atod(argv[3], axis);
+				crtemp = ft_atod(argv[2]);
+				citemp = ft_atod(argv[3]);
+				if (crtemp > DBL_MAX || crtemp < DBL_MIN || citemp > DBL_MAX || citemp < DBL_MIN)
+					return (ft_putstr_fd("error: value overflow\n", 1), NULL);
+				(*axis)->cr = (double)crtemp;
+				(*axis)->ci = (double)citemp;
+				printf("%f\n%f\n", (*axis)->cr, (*axis)->ci);
 			}
 			else
 				return (NULL);
@@ -66,7 +75,11 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 			(*axis)->ci = 0;
 		}
 		else if (!ft_strcmp("Nova", argv[1]) || !ft_strcmp("nova", argv[1]))
+		{
 			(*axis)->set = 'n';
+			(*axis)->cr = 0.3;
+			(*axis)->ci = 0.5;
+		}
 		else
 			return (NULL);
 	}

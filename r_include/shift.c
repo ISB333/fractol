@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shift.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 12:19:03 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/05 13:21:54 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/07 09:59:07 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	rlstore_instability(t_coord **axis, float zoom, char key)
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
 			(*axis)->storage[y][x] = instability;
+			(*axis)->shade[y][x] =  shaders(instability, (double)x, (double)y, *axis);
 		}
 	}
 }
@@ -63,13 +64,19 @@ void	rlshift_storage(t_data *d, char key)
 		{
 			x = WIDTH;
 			while (--x > 90)
+			{
 				d->axis->storage[y][x] = d->axis->storage[y][x - 90];
+				d->axis->shade[y][x] = d->axis->shade[y][x - 90];
+			}
 		}
 		else
 		{
 			x = -1;
 			while (++x < WIDTH - 90)
+			{
 				d->axis->storage[y][x] = d->axis->storage[y][x + 90];
+				d->axis->shade[y][x] = d->axis->shade[y][x + 90];
+			}
 		}
 		y++;
 	}
@@ -102,6 +109,7 @@ void	dustore_instability(t_coord **axis, float zoom, char key)
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
 			(*axis)->storage[y][x] = instability;
+			(*axis)->shade[y][x] =  shaders(instability, (double)x, (double)y, *axis);
 		}
 	}
 }
@@ -118,7 +126,10 @@ void	dushift_storage(t_data *d, char key)
 		{
 			x = -1;
 			while (++x < WIDTH)
+			{
 				d->axis->storage[y][x] = d->axis->storage[y - 90][x];
+				d->axis->shade[y][x] = d->axis->shade[y - 90][x];
+			}
 		}
 	}
 	else
@@ -128,7 +139,10 @@ void	dushift_storage(t_data *d, char key)
 		{
 			x = -1;
 			while (++x < WIDTH)
+			{
 				d->axis->storage[y][x] = d->axis->storage[y + 90][x];
+				d->axis->shade[y][x] = d->axis->shade[y + 90][x];
+			}
 		}
 	}
 	update_xy_shift(&d->axis, key);
