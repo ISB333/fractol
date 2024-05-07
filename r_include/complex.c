@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/07 13:27:41 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:51:13 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ double	mandelbrot(double r, t_coord **axis)
 			// return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
 			// return(it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
 			// return(it);
-			return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
-			// return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
+			// return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
+			return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
 			// return((float)it - log2(log((*axis)->cr + (*axis)->ci) / log(2)));
 		}
 	}
@@ -153,12 +153,12 @@ double	julia(double r, t_coord **axis)
 		(*axis)->yi = (*axis)->xr * (*axis)->yi * 2 + (*axis)->ci;
 		(*axis)->xr = r;
 		if (pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4)
-			return((float)it - logl(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
+			return((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
 	}
 	return (0);
 }
 
-int	complex_calc(char set, t_coord **axis)
+double	complex_calc(char set, t_coord **axis)
 {
 	if (set == 'j')
 		return (julia(0, axis));

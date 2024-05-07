@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 12:19:03 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/07 09:59:07 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:52:54 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rlstore_instability(t_coord **axis, float zoom, char key)
 			convert_to_axis((double)x, (double)y, axis, zoom);
 			instability = complex_calc((*axis)->set, axis);
 			(*axis)->storage[y][x] = instability;
-			(*axis)->shade[y][x] =  shaders(instability, (double)x, (double)y, *axis);
+			(*axis)->shade[y][x] = shaders(instability, (double)x, (double)y, *axis);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/07 13:22:53 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:53:25 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ typedef struct s_coord
 	double		y_shift;
 	int32_t		x_zoom;
 	int32_t		y_zoom;
-	int 		token;
-	int		storage[HEIGHT][WIDTH];
+	double		storage[HEIGHT][WIDTH];
 	uint32_t		shade[HEIGHT][WIDTH];
 }	t_coord;
 
@@ -66,8 +65,8 @@ long double		ft_atod(char *nptr);
 int			store_instability(t_coord **axis, float zoom);
 int			recalc_instability(t_coord **axis, float zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis);
-int			complex_calc(char set, t_coord **axis);
-uint32_t	shaders(int instability, double x, double y, t_coord *axis);
+double		complex_calc(char set, t_coord **axis);
+uint32_t	shaders(double instability, double x, double y, t_coord *axis);
 
 
 void		rlshift_storage(t_data *d, char key);

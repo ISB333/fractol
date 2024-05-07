@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/07 13:26:36 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:56:36 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,51 +44,46 @@ uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix)
 	return (newcolor);
 }
 
-uint32_t	shaders(int instability, double x, double y, t_coord *axis)
+uint32_t	shaders(double instability, double x, double y, t_coord *axis)
 {
 	int	color1;
 	int	color2;
-	double instab;
 
 	if (!instability)
 		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
 	else
 	{
-		if ((instability % 4) == 0)
-		{
+		// printf("%f\n", instability);
+		// if (instability)
+		// {
 			color1 = 0xF400FFFF;
 			color2 = 0xFF0000FF;
-		}
-		else if ((instability % 4) == 1)
-		{
-			color1 = 0x100050FF;
-			color2 = 0xa7e500FF;
-		}
-		else if ((instability % 4) == 2)
-		{
-			color1 = 0xFA0068FF;
-			color2 = 0xFFF700FF;
-		}
-		else
-		{
-			color1 = 0x02008AFF;
-			color2 = 0x00FFFFFF;
-		}
-		// instab = ((float)instability - (log2(log(pow(axis->cr, 2) + pow(axis->ci, 2)) - 1) / 2));
-
-		// instab = instability - (log(log(pow(axis->cr, 2) + pow(axis->ci, 2) -(axis->cr + axis->ci)) - 1) / 2);
+		// }
+		// else if (instability <= 2)
+		// {
+			// color1 = 0x100050FF;
+			// color2 = 0xa7e500FF;
+		// }
+		// else if (instability <= 3)
+		// {
+			// color1 = 0xFA0068FF;
+		// 	color2 = 0xFFF700FF;
+		// }
+		// else
+		// {
+		// 	color1 = 0x02008AFF;
+		// 	color2 = 0x00FFFFFF;
+		// }
 		return (shaders1(color1, color2, instability, axis));
 	}
 }
 
 int	store_instability(t_coord **axis, float zoom)
 {
-	int	instability;
+	double	instability;
 	uint32_t	x;
 	uint32_t	y;
-	uint32_t	i;
 
-	i = 0;
 	y = 0;
 	while (y < HEIGHT)
 	{
