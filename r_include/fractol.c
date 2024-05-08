@@ -112,7 +112,7 @@ int	hook_init(t_data *d)
 
 ////// TODO //////
 /*
-	-0- Pixel Incrementation
+	-0- Welcome message with commands
 	-1- Graphics Optimization
 		https://mandelbrowser.y0.pl/tutorial/computing.html#coloring
 		https://www.youtube.com/watch?v=EbanExb75mc]
@@ -123,11 +123,6 @@ int	hook_init(t_data *d)
 			- https://rotgers.io/posts/nova-fractals/
 		-2.4- Phoenix
 			https://www.jamesh.id.au/fractals/mandel/phoenix
-	-3- Optimize Zoom & Shift 
-		-3.2- Store every stable numbers, when zooming if (n root is the same == Stable)
-		https://cglearn.eu/pub/advanced-computer-graphics/fractal-rendering
-	-4- Color Shift
-		https://cglearn.eu/pub/advanced-computer-graphics/fractal-rendering	
 */
 /*
 === Today TODO ===

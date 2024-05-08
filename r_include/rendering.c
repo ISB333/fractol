@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/08 14:08:51 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/08 14:26:35 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ uint32_t	shaders_mode1(double instability)
 	int	color1;
 	int	color2;
 
-	if (instability <= 0.5)
+	if ((int)instability % 4 <= 1)
 	{
 		color1 = 0x660050FF;
 		color2 = 0xFAFF00FF;
 	}
-	else if (instability <= 0.75)
+	else if ((int)instability % 4 == 2)
 	{
 		color1 = 0x100050FF;
 		color2 = 0xa7e500FF;
 	}
-	else if (instability <= 1)
+	else if ((int)instability % 4 == 3)
 	{
 		color1 = 0xFA0068FF;
 		color2 = 0xFFF700FF;
@@ -89,41 +89,13 @@ uint32_t	shaders_mode1(double instability)
 	return (shaders_smooth(color1, color2, instability));
 }
 
-uint32_t	shaders(double instability, double x, double y, t_coord *axis)
+uint32_t	shaders(double instability, double y, t_coord *axis)
 {	
-	int	color1;
-	int	color2;
-	double radius;
 
 	if (axis->colormode == 'g')
 		return (glitch_shaders(0xF400FFFF, 0xFF0000FF, instability, y));
-	else if (axis->colormode == 's')
-		return (shaders_mode1(instability));
 	else
-	{
-		printf("%f\n", instability);
-		if ((int)instability % 4 <= 1)
-		{
-			color1 = 0x660050FF;
-			color2 = 0xFAFF00FF;
-		}
-		else if ((int)instability % 4 <= 2)
-		{
-			color1 = 0x100050FF;
-			color2 = 0xa7e500FF;
-		}
-		else if ((int)instability % 4 <= 2)
-		{
-			color1 = 0xFA0068FF;
-			color2 = 0xFFF700FF;
-		}
-		else
-		{
-			color1 = 0x02008AFF;
-			color2 = 0x00FFFFFF;
-		}
-		return (shaders1(color1, color2, instability));
-	}
+		return (shaders_mode1(instability));
 	return (0);
 }
 
@@ -143,7 +115,7 @@ int	shift_put_pxl(mlx_image_t *image, t_coord **axis)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
 			{
-				shade = shaders((*axis)->storage[y][x], (double)x, (double)y, *axis);
+				shade = shaders((*axis)->storage[y][x], (double)y, *axis);
 				mlx_put_pixel(image, x, y, shade);
 			}
 		}
@@ -169,7 +141,7 @@ int	put_pxl(mlx_image_t *image, t_coord **axis, double zoom)
 				mlx_put_pixel(image, x, y, 0x000000FF);
 			else
 			{
-				shade = shaders((*axis)->storage[y][x], (double)x, (double)y, *axis);
+				shade = shaders((*axis)->storage[y][x], (double)y, *axis);
 				mlx_put_pixel(image, x, y, shade);
 			}
 		}

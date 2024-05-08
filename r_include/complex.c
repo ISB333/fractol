@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/08 14:05:44 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/08 14:40:59 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ double	nova(double r, t_coord **axis)
 double	mandelbrot(double r, t_coord **axis)
 {
 	int	it;
-	double abscr;
-	double absci;
 
 	it = -1;
 	(*axis)->cr = 0;
@@ -113,17 +111,14 @@ double	mandelbrot(double r, t_coord **axis)
 		(*axis)->cr = r;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			if ((*axis)->colormode == 'n')
-			{
-				return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
+			if ((*axis)->colormode == 'g')
 				return (it);
-			}
-			if ((*axis)->colormode == 's')
-				return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
-			return (it);
+			else
+				return (((pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) + ((*axis)->xr + (*axis)->yi)));
+				// return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(128)));
+				// return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / log(128)));
+				// return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
 			// return(it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
-			// return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
-			// return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
 			// return((float)it - log2(log((*axis)->cr + (*axis)->ci) / log(2)));
 		}
 	}
