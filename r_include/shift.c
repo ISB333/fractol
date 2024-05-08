@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shift.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 12:19:03 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/07 13:52:54 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/08 13:18:01 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	update_xy_shift(t_coord **axis, char key)
 		(*axis)->y_shift += 0.3 * (*axis)->zoom;
 }
 
-void	rlstore_instability(t_coord **axis, float zoom, char key)
+void	rlstore_instability(t_coord **axis, double zoom, char key)
 {
-	double		instability;
 	uint32_t	x;
 	uint32_t	y;
 	uint32_t	w;
@@ -45,9 +44,7 @@ void	rlstore_instability(t_coord **axis, float zoom, char key)
 		while (++x <= w)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
-			instability = complex_calc((*axis)->set, axis);
-			(*axis)->storage[y][x] = instability;
-			(*axis)->shade[y][x] = shaders(instability, (double)x, (double)y, *axis);
+			(*axis)->storage[y][x] = complex_calc((*axis)->set, axis);
 		}
 	}
 }
@@ -55,7 +52,7 @@ void	rlstore_instability(t_coord **axis, float zoom, char key)
 void	rlshift_storage(t_data *d, char key)
 {
 	uint32_t	x;
-	uint16_t	y;
+	uint32_t	y;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -64,19 +61,13 @@ void	rlshift_storage(t_data *d, char key)
 		{
 			x = WIDTH;
 			while (--x > 90)
-			{
 				d->axis->storage[y][x] = d->axis->storage[y][x - 90];
-				d->axis->shade[y][x] = d->axis->shade[y][x - 90];
-			}
 		}
 		else
 		{
 			x = -1;
 			while (++x < WIDTH - 90)
-			{
 				d->axis->storage[y][x] = d->axis->storage[y][x + 90];
-				d->axis->shade[y][x] = d->axis->shade[y][x + 90];
-			}
 		}
 		y++;
 	}
@@ -84,9 +75,8 @@ void	rlshift_storage(t_data *d, char key)
 	rlstore_instability(&d->axis, d->axis->zoom, key);
 }
 
-void	dustore_instability(t_coord **axis, float zoom, char key)
+void	dustore_instability(t_coord **axis, double zoom, char key)
 {
-	double		instability;
 	uint32_t	x;
 	uint32_t	y;
 	uint32_t	h;
@@ -107,9 +97,7 @@ void	dustore_instability(t_coord **axis, float zoom, char key)
 		while (++x < WIDTH)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
-			instability = complex_calc((*axis)->set, axis);
-			(*axis)->storage[y][x] = instability;
-			(*axis)->shade[y][x] =  shaders(instability, (double)x, (double)y, *axis);
+			(*axis)->storage[y][x] = complex_calc((*axis)->set, axis);
 		}
 	}
 }
@@ -126,10 +114,7 @@ void	dushift_storage(t_data *d, char key)
 		{
 			x = -1;
 			while (++x < WIDTH)
-			{
 				d->axis->storage[y][x] = d->axis->storage[y - 90][x];
-				d->axis->shade[y][x] = d->axis->shade[y - 90][x];
-			}
 		}
 	}
 	else
@@ -139,10 +124,7 @@ void	dushift_storage(t_data *d, char key)
 		{
 			x = -1;
 			while (++x < WIDTH)
-			{
 				d->axis->storage[y][x] = d->axis->storage[y + 90][x];
-				d->axis->shade[y][x] = d->axis->shade[y + 90][x];
-			}
 		}
 	}
 	update_xy_shift(&d->axis, key);

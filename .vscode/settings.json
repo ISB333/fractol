@@ -2,5 +2,6 @@
     "files.associations": {
         "compare": "c",
         "random": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/home/isb3/42_Projects/5_fractol/fractol/MLX42"
 }

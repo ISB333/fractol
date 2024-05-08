@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/07 13:51:13 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:05:44 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*
-f(z) = (n +/- i)^2 + (n + i)
-f(z) = ((n +/- i) * (n +/- i) * -1) + (n +/- i)
-
-*/
-
-// int	losange(double r, t_coord **axis)
-// {
-// 	int	it;
-
-// 	it = -1;
-// 	(*axis)->cr = 0;
-// 	(*axis)->ci = 0;
-// 	while (++it < 100)
-// 	{
-// 		r = pow(sqrt(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)), 2) + (*axis)->xr;
-// 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
-// 		(*axis)->cr = r;
-// 		if ((*axis)->cr > 2 || (*axis)->ci > 2)
-// 			return (it);
-// 	}
-// 	return (0);
-// }
 
 double	burning_ship(double r, t_coord **axis)
 {
@@ -43,7 +19,7 @@ double	burning_ship(double r, t_coord **axis)
 	it = -1;
 	(*axis)->cr = 0;
 	(*axis)->ci = 0;
-	while (++it < 100)
+	while (++it < ESCAPE)
 	{
 		r = pow((*axis)->cr, 2) - pow((*axis)->ci, 2) + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
@@ -53,7 +29,11 @@ double	burning_ship(double r, t_coord **axis)
 		if ((*axis)->ci < 0)
 			(*axis)->ci *= -1;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
-			return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
+		{
+			if((*axis)->colormode == 's')
+				return ((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
+			return (it);
+		}
 	}
 	return (0);
 }
@@ -76,7 +56,7 @@ double	nova(double r, t_coord **axis)
 	it = -1;
 // Initialize z with z_r = 1 and z_i = 0
 
-	while (++it < 100)
+	while (++it < ESCAPE)
 	{
 		zrp3 = pow((*axis)->xr, 3);
 		zip3 = pow((*axis)->yi, 3) * -1;
@@ -106,7 +86,11 @@ double	nova(double r, t_coord **axis)
 		// (*axis)->ci = (*axis)->ci - zip3 + (*axis)->yi;
 
 		if ((pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4))
+		{
+			if((*axis)->colormode == 's')
+				return ((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
 			return (it);
+		}
 		// if ((*axis)->cr + (*axis)->ci >= 4)
 			// return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
 	}
@@ -116,26 +100,30 @@ double	nova(double r, t_coord **axis)
 double	mandelbrot(double r, t_coord **axis)
 {
 	int	it;
+	double abscr;
+	double absci;
 
 	it = -1;
 	(*axis)->cr = 0;
 	(*axis)->ci = 0;
-	while (++it < 50)
+	while (++it < ESCAPE)
 	{
 		r = pow((*axis)->cr, 2) - pow((*axis)->ci, 2) + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
 		(*axis)->cr = r;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			//if shaders == glitch returns it
-			
-			// (*axis)->instability = it % 4;
-			// return(it);
-			// return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
+			if ((*axis)->colormode == 'n')
+			{
+				return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
+				return (it);
+			}
+			if ((*axis)->colormode == 's')
+				return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
+			return (it);
 			// return(it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
-			// return(it);
 			// return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
-			return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
+			// return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
 			// return((float)it - log2(log((*axis)->cr + (*axis)->ci) / log(2)));
 		}
 	}
@@ -147,13 +135,17 @@ double	julia(double r, t_coord **axis)
 	int	it;
 
 	it = -1;
-	while (++it < 100)
+	while (++it < ESCAPE)
 	{
 		r = pow((*axis)->xr, 2) - pow((*axis)->yi, 2) + (*axis)->cr;
 		(*axis)->yi = (*axis)->xr * (*axis)->yi * 2 + (*axis)->ci;
 		(*axis)->xr = r;
 		if (pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4)
-			return((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
+		{
+			if((*axis)->colormode == 's')
+				// return ((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
+			return (it);
+		}
 	}
 	return (0);
 }

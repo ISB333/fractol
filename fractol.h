@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/07 13:53:25 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/08 13:49:09 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <float.h>
 # define WIDTH 1200
 # define HEIGHT 800
+# define ESCAPE 50
 # define R(a) (a) >> 16
 # define G(a) ((a) >> 8) & 0xFF
 # define B(a) (a) & 0xFF
@@ -31,22 +32,19 @@
 
 typedef struct s_coord
 {
+	char		colormode;
 	char		set;
 	double		xr;
 	double		yi;
 	double		cr;
 	double		ci;
 	double		temp;
-	int			color;
-	// int			instability;
-	// double		smooth_inst;
 	double		zoom;
 	double		x_shift;
 	double		y_shift;
 	int32_t		x_zoom;
 	int32_t		y_zoom;
 	double		storage[HEIGHT][WIDTH];
-	uint32_t		shade[HEIGHT][WIDTH];
 }	t_coord;
 
 typedef struct s_data
@@ -59,12 +57,13 @@ typedef struct s_data
 
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
+int		init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
 long double		ft_atod(char *nptr);
 
-int			store_instability(t_coord **axis, float zoom);
-int			recalc_instability(t_coord **axis, float zoom);
-int			put_pxl(mlx_image_t *image, t_coord **axis);
+int			store_instability(t_coord **axis, double zoom);
+int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
+int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
 double		complex_calc(char set, t_coord **axis);
 uint32_t	shaders(double instability, double x, double y, t_coord *axis);
 
@@ -72,7 +71,7 @@ uint32_t	shaders(double instability, double x, double y, t_coord *axis);
 void		rlshift_storage(t_data *d, char key);
 void		dushift_storage(t_data *d, char key);
 
-void		convert_to_axis(double x, double y, t_coord **axis, float zoom);
+void		convert_to_axis(double x, double y, t_coord **axis, double zoom);
 int			error(void);
 int			ff(t_data *d, t_coord *axis, int status);
 void		command_set(char *msg);

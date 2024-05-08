@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/07 11:04:54 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/08 10:58:32 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	is_nbr(char *str)
 	return (-1);
 }
 
-void	convert_to_axis(double x, double y, t_coord **axis, float zoom)
+void	convert_to_axis(double x, double y, t_coord **axis, double zoom)
 {
 	x -= (WIDTH / 2);
 	y -= (HEIGHT / 2);

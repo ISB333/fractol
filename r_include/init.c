@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/07 12:33:54 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/08 13:31:52 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,61 +28,71 @@ t_data	*init_img(t_data **d)
 	return (*d);
 }
 
-t_coord	*parse_coord(t_coord **axis, char *argv[])
+int	init_set(t_coord **axis, char *argv[])
 {
 	long double	crtemp;
 	long double	citemp;
 
-	*axis = malloc(sizeof(t_coord));
-	if (*axis)
+	if (!ft_strcmp("Mandelbrot", argv[1]) \
+		|| !ft_strcmp("mandelbrot", argv[1]))
+		return ((*axis)->set = 'm', 0);
+	else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
 	{
-		if (!ft_strcmp("Mandelbrot", argv[1]) \
-			|| !ft_strcmp("mandelbrot", argv[1]))
-			(*axis)->set = 'm';
-		else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
+		if (argv[2] && argv[2][0] == '1' && !argv[2][1])
 		{
-			if (argv[2] && argv[2][0] == '1' && !argv[2][1])
-			{
-				(*axis)->set = 'j';
-				(*axis)->cr = 0.3;
-				(*axis)->ci = 0.5;
-			}
-			else if (argv[2] && argv[2][0] == '2' && !argv[2][1])
-			{
-				(*axis)->set = 'j';
-				(*axis)->cr = -1.476;
-				(*axis)->ci = 0;
-			}
-			else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
-			{
-				(*axis)->set = 'j';
-				crtemp = ft_atod(argv[2]);
-				citemp = ft_atod(argv[3]);
-				if (crtemp > DBL_MAX || crtemp < DBL_MIN || citemp > DBL_MAX || citemp < DBL_MIN)
-					return (ft_putstr_fd("error: value overflow\n", 1), NULL);
-				(*axis)->cr = (double)crtemp;
-				(*axis)->ci = (double)citemp;
-				printf("%f\n%f\n", (*axis)->cr, (*axis)->ci);
-			}
-			else
-				return (NULL);
-		}
-		else if (!ft_strcmp("Burning", argv[1]) \
-				|| !ft_strcmp("burning", argv[1]))
-		{
-			(*axis)->set = 'b';
-			(*axis)->cr = -1.476;
-			(*axis)->ci = 0;
-		}
-		else if (!ft_strcmp("Nova", argv[1]) || !ft_strcmp("nova", argv[1]))
-		{
-			(*axis)->set = 'n';
+			(*axis)->set = 'j';
 			(*axis)->cr = 0.3;
 			(*axis)->ci = 0.5;
 		}
-		else
-			return (NULL);
+		else if (argv[2] && argv[2][0] == '2' && !argv[2][1])
+		{
+			(*axis)->set = 'j';
+			(*axis)->cr = -1.476;
+			(*axis)->ci = 0;
+		}
+		else if (argv[2] && argv[2][0] == '3' && !argv[2][1])
+		{
+			(*axis)->set = 'j';
+			(*axis)->cr = -0.8;
+			(*axis)->ci = 0.156;
+		}
+		else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
+		{
+			(*axis)->set = 'j';
+			crtemp = ft_atod(argv[2]);
+			citemp = ft_atod(argv[3]);
+			if (crtemp > DBL_MAX || crtemp < DBL_MIN || citemp > DBL_MAX || citemp < DBL_MIN)
+				return (ft_putstr_fd("error: value overflow\n", 1), -1);
+			(*axis)->cr = (double)crtemp;
+			(*axis)->ci = (double)citemp;
+		}
+		return (0);
 	}
-	(*axis)->zoom = 1;
+	else if (!ft_strcmp("Burning", argv[1]) \
+			|| !ft_strcmp("burning", argv[1]))
+	{
+		(*axis)->cr = -1.476;
+		(*axis)->ci = 0;
+		return ((*axis)->set = 'b', 0);
+	}
+	else if (!ft_strcmp("Nova", argv[1]) || !ft_strcmp("nova", argv[1]))
+	{
+		(*axis)->cr = 0.3;
+		(*axis)->ci = 0.5;
+		return((*axis)->set = 'n', 0);
+	}
+	return (-1);
+}
+
+t_coord	*parse_coord(t_coord **axis, char *argv[])
+{
+	*axis = malloc(sizeof(t_coord));
+	if (*axis)
+	{
+		if (init_set(axis, argv))
+			return (NULL);
+		(*axis)->zoom = 1;
+		(*axis)->colormode = 'n';
+	}
 	return (*axis);
 }
