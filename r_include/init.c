@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/08 13:31:52 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/09 15:39:19 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 		if (init_set(axis, argv))
 			return (NULL);
 		(*axis)->zoom = 1;
-		(*axis)->colormode = 'n';
+		(*axis)->colormode = 's';
 	}
 	return (*axis);
 }

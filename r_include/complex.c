@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/08 14:54:12 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/09 14:36:47 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double	burning_ship(double r, t_coord **axis)
 			(*axis)->ci *= -1;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			if((*axis)->colormode == 's')
+			if ((*axis)->colormode == 's')
 				return ((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
 			return (it);
 		}
@@ -87,7 +87,7 @@ double	nova(double r, t_coord **axis)
 
 		if ((pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4))
 		{
-			if((*axis)->colormode == 's')
+			if ((*axis)->colormode == 's')
 				return ((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
 			return (it);
 		}
@@ -111,14 +111,14 @@ double	mandelbrot(double r, t_coord **axis)
 		(*axis)->cr = r;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			if ((*axis)->colormode == 'g')
-				return (it);
-			else
+			if ((*axis)->colormode == 's')
+			{
+				// return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(2)));
+				return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / log(333)));
+			}
 				// return((float)it - log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) / log(2)));
-				return((float)it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / log(128)));
 				// return(((float)it + 1) - log(sqrt((pow((*axis)->cr, 2) + pow((*axis)->ci, 2))) / log(4)));
-			// return(it - (log2(log(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)) - 1) / 2));
-			// return((float)it - log2(log((*axis)->cr + (*axis)->ci) / log(2)));
+			return (it);
 		}
 	}
 	return (0);
@@ -136,7 +136,7 @@ double	julia(double r, t_coord **axis)
 		(*axis)->xr = r;
 		if (pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4)
 		{
-			if((*axis)->colormode == 's')
+			if ((*axis)->colormode == 's')
 				// return ((float)it - log2(log(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) / log(2)));
 			return (it);
 		}

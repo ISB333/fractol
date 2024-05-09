@@ -5,6 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/09 14:11:42 by isb3              #+#    #+#             */
+/*   Updated: 2024/05/09 15:29:19 by isb3             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:36:34 by adesille          #+#    #+#             */
 /*   Updated: 2024/05/08 12:50:51by isb3             ###   ########.fr       */
 /*                                                                            */
@@ -76,9 +88,9 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
 	printf("zoom * %d = %f\nxdelta = %f\nydelta = %f\n", ++i, d->axis->zoom, xdelta, ydelta);
 	if (ydelta == 1.)
-		d->axis->zoom *= 0.9;
+		d->axis->zoom *= 0.8;
 	else if (ydelta == -1.)
-		d->axis->zoom *= 1.1;
+		d->axis->zoom *= 1.2;
 	put_pxl(d->image, &d->axis, d->axis->zoom);
 }
 
@@ -99,17 +111,36 @@ int	hook_init(t_data *d)
 	mlx_scroll_hook(d->mlx, &scroll_hook, d);
 	mlx_key_hook(d->mlx, &key_hook, d);
 	// mlx_mouse_hook(d->mlx, &mouse_click, d);
-	mlx_put_string(d->mlx, "Zoom : Scroll", 50, 50);
-	mlx_put_string(d->mlx, "Move : Keyboard Arrows", 50, 70);
-	mlx_put_string(d->mlx, "Change Fractal :", 50, 100);
-	mlx_put_string(d->mlx, "Julia 1 : 'J'", 50, 120);
-	mlx_put_string(d->mlx, "Julia 2 : 'K'", 50, 140);
-	mlx_put_string(d->mlx, "Julia 3 : 'L'", 50, 160);
-	mlx_put_string(d->mlx, "Mandelbrot : 'M'", 50, 180);
-	mlx_put_string(d->mlx, "Burning Ship : 'B'", 50, 200);
 	return (0);
 }
 
+void	show_commands()
+{
+	ft_putstr_fd("\n░▒▓████████▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░▒▓██████\
+██▓▒░▒▓██████▓▒░░▒▓█▓▒░        \n\
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░▒▓█▓▒░\
+░▒▓█▓▒░▒▓█▓▒░        \n\
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░▒▓█▓▒░\
+░▒▓█▓▒░▒▓█▓▒░        \n\
+░▒▓██████▓▒░ ░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░▒▓█▓▒░\
+░▒▓█▓▒░▒▓█▓▒░        \n\
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░▒▓█▓▒░\
+░▒▓█▓▒░▒▓█▓▒░        \n\
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░▒▓█▓▒░\
+░▒▓█▓▒░▒▓█▓▒░        \n\
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░  ░▒▓█▓▒░   ░▒▓██████▓▒░\
+░▒▓████████▓▒░ \n\n", 1);
+	ft_putstr_fd("Zoom : Scroll\n", 1);
+	ft_putstr_fd("Move : Keyboard Arrows\n\n", 1);
+	ft_putstr_fd("Change Fractal :\n", 1);
+	ft_putstr_fd("Julia 1 = 'J'\n", 1);
+	ft_putstr_fd("Julia 2 = 'K'\n", 1);
+	ft_putstr_fd("Julia 3 = 'L'\n", 1);
+	ft_putstr_fd("Mandelbrot = 'M'\n", 1);
+	ft_putstr_fd("Burning Ship = 'B'\n\n", 1);
+	ft_putstr_fd("Change colors :\n", 1);
+	ft_putstr_fd("Numpad 0 to 2\n", 1);
+}
 ////// TODO //////
 /*
 	-0- Welcome message with commands
@@ -143,6 +174,7 @@ int32_t	main(int argc, char *argv[])
 		{
 			if (init_img(&d))
 			{
+				show_commands();
 				d->axis = axis;
 				hook_init(d);
 				put_pxl(d->image, &axis, d->axis->zoom);

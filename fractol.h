@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/08 14:25:56 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/09 15:30:32 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			store_instability(t_coord **axis, double zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
 int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
 double		complex_calc(char set, t_coord **axis);
-uint32_t	shaders(double instability, double y, t_coord *axis);
+// uint32_t	shaders(double instability, double y, t_coord *axis);
 
 
 void		rlshift_storage(t_data *d, char key);
