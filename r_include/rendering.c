@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/10 14:15:14 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:25:25 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,45 @@ uint32_t	simple_shaders(double instability)
 	int	startcolor = 0;
 	int	endcolor = 0;
 
+	// if ((int)instability % 4 == 0)
+	// {
+	// 	startcolor = 0xFF001EFF;
+	// 	endcolor = 0xFF00A8FF;
+	// }
+	// else if ((int)instability % 4 == 1)
+	// {
+	// 	startcolor = 0xFF00A8FF;
+	// 	endcolor = 0x1400FFFF;
+	// }
+	// else if ((int)instability % 4 == 2)
+	// {
+	// 	startcolor = 0x1400FFFF;
+	// 	endcolor = 0x00F0FFFF;
+	// }
+	// else
+	// {
+	// 	startcolor = 0x00F0FFFF;
+	// 	endcolor = 0x00FF1AFF;
+	// }
 	if ((int)instability % 4 == 0)
 	{
-		startcolor = 0xFF001EFF;
-		endcolor = 0xFF00A8FF;
+		startcolor = 0x660050FF;
+		endcolor = 0xFAFF00FF;
 	}
 	else if ((int)instability % 4 == 1)
 	{
-		startcolor = 0xFF00A8FF;
-		endcolor = 0x1400FFFF;
+		startcolor = 0x100050FF;
+		endcolor = 0xa7e500FF;
 	}
 	else if ((int)instability % 4 == 2)
 	{
-		startcolor = 0x1400FFFF;
-		endcolor = 0x00F0FFFF;
+		startcolor = 0xFA0068FF;
+		endcolor = 0xFFF700FF;
 	}
 	else
 	{
-		startcolor = 0x00F0FFFF;
-		endcolor = 0x00FF1AFF;
+		startcolor = 0x02008AFF;
+		endcolor = 0x00FFFFFF;
 	}
 	return (((startcolor / endcolor) ^ (int)instability) * endcolor);
 }
@@ -82,98 +102,12 @@ uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix)
 	return (newcolor);
 }
 
-// uint32_t	color_mode2(double instability)
-// {
-// 	int	color1;
-// 	int	color2;
-
-// 	if ((int)instability % 4 == 0)
-// 	{
-// 		color1 = 0xe8888aFF;
-// 		color2 = 0xaa0d37FF;
-// 	}
-// 	else if ((int)instability % 4 == 1)
-// 	{
-// 		color1 = 0xfc5502FF;
-// 		color2 = 0xe8ba5fFF;
-// 	}
-// 	else if ((int)instability % 4 == 2)
-// 	{
-// 		color1 = 0xe5d11bFF;
-// 		color2 = 0xf9f2aeFF;
-// 	}
-// 	else
-// 	{
-// 		color1 = 0x04228eFF;
-// 		color2 = 0xbff9fcFF;
-// 	}
-// 	return (shaders_smooth(color1, color2, instability));
-// }
-
-// uint32_t	color_mode2(double instability)
-// {
-// 	int	color1;
-// 	int	color2;
-
-// 	if ((int)instability % 4 == 0)
-// 	{
-// 		color1 = 0xFF001EFF;
-// 		color2 = 0xFF00A8FF;
-// 	}
-// 	else if ((int)instability % 4 == 1)
-// 	{
-// 		color1 = 0xFF00A8FF;
-// 		color2 = 0x1400FFFF;
-// 	}
-// 	else if ((int)instability % 4 == 2)
-// 	{
-// 		color1 = 0x1400FFFF;
-// 		color2 = 0x00F0FFFF;
-// 	}
-// 	else
-// 	{
-// 		color1 = 0x00F0FFFF;
-// 		color2 = 0x00FF1AFF;
-// 	}
-// 	return (shaders_smooth(color1, color2, instability));
-// }
-
 uint32_t	color_mode1(double instability)
 {
 	int	color1;
 	int	color2;
 
-	// if ((int)instability % 6 == 0)
-	// {
-	// 	color1 = 0xFF001EFF;
-	// 	color2 = 0xFF00A8FF;
-	// }
-	// else if ((int)instability % 6 == 1)
-	// {
-	// 	color1 = 0xFF00A8FF;
-	// 	color2 = 0x1400FFFF;
-	// }
-	// else if ((int)instability % 6 == 2)
-	// {
-	// 	color1 = 0x1400FFFF;
-	// 	color2 = 0x00F0FFFF;
-	// }
-	// else if ((int)instability % 6 == 3)
-	// {
-	// 	color1 = 0x00F0FFFF;
-	// 	color2 = 0x00FF1AFF;
-	// }
-	// else if ((int)instability % 6 == 4)
-	// {
-	// 	color1 = 0x00FF1AFF;
-	// 	color2 = 0xFFE600FF;
-	// }
-	// else
-	// {
-	// 	color1 = 0xFFE600FF;
-	// 	color2 = 0xFFE600FF;
-	// }
-	if ((int)instability % 4 <= 0)
+	if ((int)instability % 4 == 0)
 	{
 		color1 = 0x660050FF;
 		color2 = 0xFAFF00FF;
