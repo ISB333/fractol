@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shift.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 12:19:03 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/08 13:18:01 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/10 10:06:03 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	rlstore_instability(t_coord **axis, double zoom, char key)
 		while (++x <= w)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
-			(*axis)->storage[y][x] = complex_calc((*axis)->set, axis);
+			(*axis)->storage[y][x] = complex_calcul((*axis)->set, axis);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void	dustore_instability(t_coord **axis, double zoom, char key)
 		while (++x < WIDTH)
 		{
 			convert_to_axis((double)x, (double)y, axis, zoom);
-			(*axis)->storage[y][x] = complex_calc((*axis)->set, axis);
+			(*axis)->storage[y][x] = complex_calcul((*axis)->set, axis);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/09 15:30:32 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/10 10:59:40 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include "MLX42/include/MLX42/MLX42.h"
 # include "libft/libft.h"
-# include "math.h"
+# include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <memory.h>
 # include <float.h>
+# include <limits.h>
 # define WIDTH 1200
 # define HEIGHT 800
 # define ESCAPE 50
@@ -57,14 +58,15 @@ typedef struct s_data
 
 t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
-int		init_set(t_coord **axis, char *argv[]);
+int			init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
-long double		ft_atod(char *nptr);
+long double	ft_atod(char *nptr);
+int			hook_init(t_data *d);
 
 int			store_instability(t_coord **axis, double zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
 int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
-double		complex_calc(char set, t_coord **axis);
+double		complex_calcul(char set, t_coord **axis);
 // uint32_t	shaders(double instability, double y, t_coord *axis);
 
 

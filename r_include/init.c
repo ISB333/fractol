@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/09 15:39:19 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/10 14:13:40 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <limits.h>
 
 t_data	*init_img(t_data **d)
 {
@@ -28,46 +27,52 @@ t_data	*init_img(t_data **d)
 	return (*d);
 }
 
-int	init_set(t_coord **axis, char *argv[])
+int	julia_init_utils(t_coord **axis, char *argv[])
 {
 	long double	crtemp;
 	long double	citemp;
 
+	(*axis)->set = 'j';
+	crtemp = ft_atod(argv[2]);
+	citemp = ft_atod(argv[3]);
+	if (crtemp > DBL_MAX || crtemp < DBL_MIN || citemp > DBL_MAX \
+		|| citemp < DBL_MIN)
+		return (ft_putstr_fd("error: value overflow\n", 1), -1);
+	(*axis)->cr = (double)crtemp;
+	(*axis)->ci = (double)citemp;
+	return (0);
+}
+
+int	julia_init(t_coord **axis, char *argv[])
+{
+	(*axis)->set = 'j';
+	if (argv[2] && argv[2][0] == '1' && !argv[2][1])
+	{
+		(*axis)->cr = 0.3;
+		(*axis)->ci = 0.5;
+	}
+	else if (argv[2] && argv[2][0] == '2' && !argv[2][1])
+	{
+		(*axis)->cr = -1.476;
+		(*axis)->ci = 0;
+	}
+	else if (argv[2] && argv[2][0] == '3' && !argv[2][1])
+	{
+		(*axis)->cr = -0.8;
+		(*axis)->ci = 0.156;
+	}
+	else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
+		return (julia_init_utils(axis, argv));
+	return (0);
+}
+
+int	init_set(t_coord **axis, char *argv[])
+{
 	if (!ft_strcmp("Mandelbrot", argv[1]) \
 		|| !ft_strcmp("mandelbrot", argv[1]))
 		return ((*axis)->set = 'm', 0);
 	else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
-	{
-		if (argv[2] && argv[2][0] == '1' && !argv[2][1])
-		{
-			(*axis)->set = 'j';
-			(*axis)->cr = 0.3;
-			(*axis)->ci = 0.5;
-		}
-		else if (argv[2] && argv[2][0] == '2' && !argv[2][1])
-		{
-			(*axis)->set = 'j';
-			(*axis)->cr = -1.476;
-			(*axis)->ci = 0;
-		}
-		else if (argv[2] && argv[2][0] == '3' && !argv[2][1])
-		{
-			(*axis)->set = 'j';
-			(*axis)->cr = -0.8;
-			(*axis)->ci = 0.156;
-		}
-		else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
-		{
-			(*axis)->set = 'j';
-			crtemp = ft_atod(argv[2]);
-			citemp = ft_atod(argv[3]);
-			if (crtemp > DBL_MAX || crtemp < DBL_MIN || citemp > DBL_MAX || citemp < DBL_MIN)
-				return (ft_putstr_fd("error: value overflow\n", 1), -1);
-			(*axis)->cr = (double)crtemp;
-			(*axis)->ci = (double)citemp;
-		}
-		return (0);
-	}
+		return (julia_init(axis, argv));
 	else if (!ft_strcmp("Burning", argv[1]) \
 			|| !ft_strcmp("burning", argv[1]))
 	{
@@ -77,9 +82,9 @@ int	init_set(t_coord **axis, char *argv[])
 	}
 	else if (!ft_strcmp("Nova", argv[1]) || !ft_strcmp("nova", argv[1]))
 	{
-		(*axis)->cr = 0.3;
-		(*axis)->ci = 0.5;
-		return((*axis)->set = 'n', 0);
+		(*axis)->cr = 1;
+		(*axis)->ci = 0;
+		return ((*axis)->set = 'n', 0);
 	}
 	return (-1);
 }
@@ -92,7 +97,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 		if (init_set(axis, argv))
 			return (NULL);
 		(*axis)->zoom = 1;
-		(*axis)->colormode = 's';
+		(*axis)->colormode = 'z';
 	}
 	return (*axis);
 }
