@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:55:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/10 11:08:46 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:21:40 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	command_set(char *msg)
 	ft_putstr_fd("-2.3- Julia Preset 3 (Type Julia 3)\n", 1);
 	ft_putstr_fd("-2.3- Julia Preset of your choices \
 (Type Julia *complex number*)\n\n", 1);
+	ft_putstr_fd(" -3-  Burning Ship (Type Burning)\n", 1);
 }
