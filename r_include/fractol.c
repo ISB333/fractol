@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:11:42 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/10 14:22:50 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:35:21 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int32_t	main(int argc, char *argv[])
 				hook_init(d);
 				put_pxl(d->image, &axis, d->axis->zoom);
 				if (mlx_image_to_window(d->mlx, d->image, 0, 0) == -1)
-					return (mlx_close_window(d->mlx), error());
+					return (mlx_close_window(d->mlx), error(), ff(d, axis, 1));
 				mlx_loop(d->mlx);
 				mlx_delete_image(d->mlx, d->image);
 				return (mlx_terminate(d->mlx), ff(d, axis, 0), 0);

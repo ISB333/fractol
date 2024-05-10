@@ -15,7 +15,7 @@
 NAME = fractol
 HEADERS = -I. -I$(LIBMLX)/include -I./libft
 # DEPFLAGS = -MP -MD
-CFLAGS += -Wall -Wextra -Wunreachable-code -ofast -g3 
+CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3
 CC = cc
 
 ######################## SOURCES ########################
@@ -24,7 +24,7 @@ LIBMLX := ./MLX42
 LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g3
 SRCS := ./r_include/fractol.c ./r_include/complex.c ./r_include/rendering.c \
 		./r_include/utils.c ./r_include/utils2.c ./r_include/init.c \
-		./r_include/shift.c ./r_include/events.c
+		./r_include/shift.c ./r_include/events.c ./r_include/rendering_utils.c
 
 OBJDIR := .obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/10 10:59:40 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:42:17 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,17 @@ t_coord		*parse_coord(t_coord **axis, char *argv[]);
 int			init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
 long double	ft_atod(char *nptr);
-int			hook_init(t_data *d);
+void		hook_init(t_data *d);
 
-int			store_instability(t_coord **axis, double zoom);
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
 int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
 double		complex_calcul(char set, t_coord **axis);
-// uint32_t	shaders(double instability, double y, t_coord *axis);
 
+uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix);
+uint32_t	simple_shaders(double instability);
+uint32_t	mono_shaders(double instability);
+uint32_t	shaders_smooth(int startcolor, int endcolor, double instability);
+uint32_t	smooth_mode1(double instability);
 
 void		rlshift_storage(t_data *d, char key);
 void		dushift_storage(t_data *d, char key);

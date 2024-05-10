@@ -1,7 +1,0 @@
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/mlx42.dir
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/edit_cache.dir
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/rebuild_cache.dir
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/list_install_components.dir
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/install.dir
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/install/local.dir
-/home/isb3/42_Projects/5_fractol/fractol/build/CMakeFiles/install/strip.dir

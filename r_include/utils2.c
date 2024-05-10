@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:55:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/10 14:21:40 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:44:42 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	ff(t_data *d, t_coord *axis, int status)
 	if (axis)
 		free(axis);
 	if (!status)
-		exit(EXIT_SUCCESS);
+		return (exit(EXIT_SUCCESS), 0);
 	else
-		exit(EXIT_FAILURE);
+		return (exit(EXIT_FAILURE), 1);
 	return (1);
 }
 
