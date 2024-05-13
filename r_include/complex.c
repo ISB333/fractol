@@ -6,34 +6,11 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/13 12:49:30 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/13 13:18:28 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-double	nova(double r, t_coord **axis)
-{
-	int	it;
-
-	double	zr;
-	double	zi;
-	 
-
-	double tmp = 1.0;
-	while (++it < ESCAPE)
-	{
-		zr = (*axis)->xr;
-		zi = (*axis)->yi;
-		tmp = (pow((*axis)->xr, 2) + pow((*axis)->yi, 2)) * (pow((*axis)->xr, 2) + pow((*axis)->yi, 2));
-		(*axis)->xr = (2 * (*axis)->xr * tmp + pow((*axis)->xr, 2) - pow((*axis)->yi, 2)) / (3.0 * tmp);
-		(*axis)->yi = (2 * (*axis)->yi * (tmp - zr)) / (3.0 * tmp);
-		tmp = pow(((*axis)->xr - zr), 2) + pow(((*axis)->yi - zi), 2);
-		if (tmp <= 0.0001)
-			return((float)it);
-	}
-	return (0);
-}
 
 double	burning_ship(double r, t_coord **axis)
 {
