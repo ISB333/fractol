@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 11:54:23 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/10 14:41:42 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/13 12:52:19 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,26 @@
 
 uint32_t	mono_shaders(double instability)
 {
-	int	startcolor;
-	int	endcolor;
+	uint32_t newcolor;
 
-	startcolor = 0x04228eFF;
-	endcolor = 0xbff9fcFF;
-	return (((startcolor / endcolor) ^ (int)instability) * endcolor);
+	union       colour_u
+	{
+	unsigned int  number;
+	unsigned char channels[4];
+	};
+
+	union colour_u     c;
+
+	// c.channels[0] = (unsigned char)(sin(0.116 * instability + 4) * 230 + 25);
+	// c.channels[1] = (unsigned char)(sin(0.0513 * instability + 2) * 230 + 25);
+	// c.channels[2] = (unsigned char)(sin(0.01 * instability + 1) * 230 + 25);
+	// c.channels[3] = 255;
+	c.channels[0] = (unsigned char)(sin(0.116 * instability + 4) * 127.5 + (127.25));
+	c.channels[1] = (unsigned char)(sin(0.0513 * instability + 2) * 127.5 + (127.5));
+	c.channels[2] = (unsigned char)(sin(0.01 * instability + 1) * 127.5 + (127.5));
+	c.channels[3] = 255;
+	newcolor = RGBA(c.channels[0], c.channels[1], c.channels[2], c.channels[3]);
+	return (newcolor);
 }
 
 uint32_t	simple_shaders(double instability)

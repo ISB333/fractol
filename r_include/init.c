@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/10 14:51:08 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/13 10:51:44 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 		if (init_set(axis, argv))
 			return (NULL);
 		(*axis)->zoom = 1;
-		(*axis)->colormode = 'z';
+		(*axis)->colormode = 'm';
 	}
 	return (*axis);
 }

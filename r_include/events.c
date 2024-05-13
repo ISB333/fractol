@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:01 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/10 14:43:28 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/13 10:28:03 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	change_color(t_data **d, keys_t key)
 		(*d)->axis->colormode = 'z';
 	else if (key == 323)
 		(*d)->axis->colormode = 'n';
-	else if (key == 323)
+	else if (key == 324)
 		(*d)->axis->colormode = 'm';
 	put_pxl((*d)->image, &(*d)->axis, (*d)->axis->zoom);
 }
@@ -77,7 +77,7 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 
 	d = param;
 	mlx_get_mouse_pos(d->mlx, &d->axis->x_zoom, &d->axis->y_zoom);
-	xdelta = 0.;
+	xdelta = 0 * xdelta;
 	if (ydelta == 1.)
 		d->axis->zoom *= 0.8;
 	else if (ydelta == -1.)

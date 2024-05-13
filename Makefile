@@ -15,7 +15,7 @@
 NAME = fractol
 HEADERS = -I. -I$(LIBMLX)/include -I./libft
 # DEPFLAGS = -MP -MD
-CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3
+CFLAGS += -Wall -Wextra -Wunreachable-code -ofast -g3
 CC = cc
 
 ######################## SOURCES ########################
