@@ -14,7 +14,6 @@
 
 NAME = fractol
 HEADERS = -I. -I$(LIBMLX)/include -I./libft
-# DEPFLAGS = -MP -MD
 CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3
 CC = cc
 
@@ -28,7 +27,6 @@ SRCS := ./srcs/fractol.c ./srcs/complex.c ./srcs/rendering.c \
 
 OBJDIR := .obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
-# DEPFILES := $(SRCS:%.c=$(OBJDIR)/%.d)
 
 GREEN = \033[0;92m
 CURRENT_DATE := $(shell date +"%Y-%m-%d %H:%M")
@@ -71,7 +69,5 @@ git:
 	@git commit -m "$(CURRENT_DATE)" > /dev/null 2>&1
 	@git push > /dev/null 2>&1
 	@echo "$(GREEN)┌(メ▼▼)┘ GIT UPDATE └(▼▼メ)┐ $(DEF_COLOR)"
-
-# -include $(DEPFILES)
 
 .PHONY: all clean fclean re git libmlx
