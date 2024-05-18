@@ -6,17 +6,14 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/13 13:18:28 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/18 12:14:44 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	burning_ship(double r, t_coord **axis)
+double	burning_ship(double r, t_coord **axis, int it)
 {
-	int	it;
-
-	it = -1;
 	(*axis)->cr = 0;
 	(*axis)->ci = 0;
 	while (++it < ESCAPE)
@@ -24,20 +21,18 @@ double	burning_ship(double r, t_coord **axis)
 		r = pow((*axis)->cr, 2) - pow((*axis)->ci, 2) + (*axis)->xr;
 		(*axis)->ci = (*axis)->cr * (*axis)->ci * 2 + (*axis)->yi;
 		(*axis)->cr = r;
-		if ((*axis)->cr < 0)
-			(*axis)->cr *= -1;
-		if ((*axis)->ci < 0)
-			(*axis)->ci *= -1;
+		ft_abs(axis);
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			if ((*axis)->colormode == 'z')
+			if ((*axis)->colormode == 1)
+				return ((float)it - (log2(log(pow((*axis)->cr, 2) + \
+					pow((*axis)->ci, 2)) - 1) / log(333)));
+			if ((*axis)->colormode == 2)
 				return ((float)it - log2(log(pow((*axis)->cr, 2) + \
 					pow((*axis)->ci, 2)) / log(4)));
-			if ((*axis)->colormode == 'm')
-				return (((float)it - (log(2) / sqrt(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)))) / log(2));
-			if ((*axis)->colormode == 's')
-				return ((float)it - (log2(log(pow((*axis)->cr, 2) + 
-					pow((*axis)->ci, 2)) - 1) / log(333)));
+			if ((*axis)->colormode == 4)
+				return (((float)it - (log(2) / sqrt(pow((*axis)->cr, 2) + \
+					pow((*axis)->ci, 2)))) / log(2));
 			return (it);
 		}
 	}
@@ -58,14 +53,15 @@ double	mandelbrot(double r, t_coord **axis)
 		(*axis)->cr = r;
 		if ((pow((*axis)->cr, 2) + pow((*axis)->ci, 2) >= 4))
 		{
-			if ((*axis)->colormode == 'z')
+			if ((*axis)->colormode == 1)
+				return ((float)it - (log2(log(pow((*axis)->cr, 2) + \
+					pow((*axis)->ci, 2)) - 1) / log(333)));
+			if ((*axis)->colormode == 2)
 				return ((float)it - (log2(log(pow((*axis)->cr, 2) + \
 					pow((*axis)->ci, 2)) - 1) / log(4)));
-			if ((*axis)->colormode == 'm')
-				return (((float)it - (log(2) / sqrt(pow((*axis)->cr, 2) + pow((*axis)->ci, 2)))) / log(2));
-			if ((*axis)->colormode == 's')
-				return ((float)it - (log2(log(pow((*axis)->cr, 2) + 
-					pow((*axis)->ci, 2)) - 1) / log(333)));
+			if ((*axis)->colormode == 4)
+				return (((float)it - (log(2) / sqrt(pow((*axis)->cr, 2) + \
+					pow((*axis)->ci, 2)))) / log(2));
 			return (it);
 		}
 	}
@@ -84,14 +80,15 @@ double	julia(double r, t_coord **axis)
 		(*axis)->xr = r;
 		if (pow((*axis)->xr, 2) + pow((*axis)->yi, 2) >= 4)
 		{
-			if ((*axis)->colormode == 'z')
-				return ((float)it - log2(log(pow((*axis)->xr, 2) + \
-				pow((*axis)->yi, 2)) / log(4)));
-			if ((*axis)->colormode == 'm')
-				return (((float)it - (log(2) / sqrt(pow((*axis)->xr, 2) + pow((*axis)->yi, 2)))) / log(2));
-			else if ((*axis)->colormode == 's')
+			if ((*axis)->colormode == 1)
 				return ((float)it - log2(log(pow((*axis)->xr, 2) + \
 				pow((*axis)->yi, 2)) / log(333)));
+			if ((*axis)->colormode == 2)
+				return ((float)it - log2(log(pow((*axis)->xr, 2) + \
+				pow((*axis)->yi, 2)) / log(4)));
+			if ((*axis)->colormode == 4)
+				return (((float)it - (log(2) / sqrt(pow((*axis)->xr, 2) + \
+					pow((*axis)->yi, 2)))) / log(2));
 			return (it);
 		}
 	}
@@ -105,8 +102,6 @@ double	complex_calcul(char set, t_coord **axis)
 	else if (set == 'm')
 		return (mandelbrot(0, axis));
 	else if (set == 'b')
-		return (burning_ship(0, axis));
-	else if (set == 'n')
-		return (nova(0, axis));
+		return (burning_ship(0, axis, -1));
 	return (0);
 }

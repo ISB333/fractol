@@ -6,11 +6,19 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/13 13:18:18 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/18 10:38:37 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	ft_abs(t_coord **axis)
+{
+	if ((*axis)->cr < 0)
+		(*axis)->cr *= -1;
+	if ((*axis)->ci < 0)
+		(*axis)->ci *= -1;
+}
 
 long double	ft_atod(char *nptr)
 {

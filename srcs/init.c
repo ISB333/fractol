@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/13 10:51:44 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/18 12:16:06 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	julia_init(t_coord **axis, char *argv[])
 	}
 	else if (argv[2] && argv[2][0] == '3' && !argv[2][1])
 	{
-		(*axis)->cr = -0.8;
-		(*axis)->ci = 0.156;
+		(*axis)->cr = 0.285;
+		(*axis)->ci = 0.01;
 	}
 	else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
 		return (julia_init_utils(axis, argv));
@@ -76,15 +76,9 @@ int	init_set(t_coord **axis, char *argv[])
 	else if (!ft_strcmp("Burning", argv[1]) \
 			|| !ft_strcmp("burning", argv[1]))
 	{
-		(*axis)->cr = -1.476;
+		(*axis)->cr = 0;
 		(*axis)->ci = 0;
 		return ((*axis)->set = 'b', 0);
-	}
-	else if (!ft_strcmp("Nova", argv[1]) || !ft_strcmp("nova", argv[1]))
-	{
-		(*axis)->cr = 1;
-		(*axis)->ci = 0;
-		return ((*axis)->set = 'n', 0);
 	}
 	return (-1);
 }
@@ -97,7 +91,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 		if (init_set(axis, argv))
 			return (NULL);
 		(*axis)->zoom = 1;
-		(*axis)->colormode = 'm';
+		(*axis)->colormode = 5;
 	}
 	return (*axis);
 }

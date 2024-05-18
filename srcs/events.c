@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:01 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/13 10:28:03 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/18 11:42:10 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ void	change_fractal(t_data **d, keys_t key)
 void	change_color(t_data **d, keys_t key)
 {
 	if (key == 320)
-		(*d)->axis->colormode = 'g';
+		(*d)->axis->colormode = 0;
 	else if (key == 321)
-		(*d)->axis->colormode = 's';
+		(*d)->axis->colormode = 1;
 	else if (key == 322)
-		(*d)->axis->colormode = 'z';
+		(*d)->axis->colormode = 2;
 	else if (key == 323)
-		(*d)->axis->colormode = 'n';
+		(*d)->axis->colormode = 3;
 	else if (key == 324)
-		(*d)->axis->colormode = 'm';
+		(*d)->axis->colormode = 4;
+	else if (key == 325)
+		(*d)->axis->colormode = 5;
 	put_pxl((*d)->image, &(*d)->axis, (*d)->axis->zoom);
 }
 

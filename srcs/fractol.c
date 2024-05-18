@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:11:42 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/13 10:26:41 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/18 11:37:05 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,8 @@ void	show_commands(void)
 	ft_putstr_fd("Mandelbrot = 'M'\n", 1);
 	ft_putstr_fd("Burning Ship = 'B'\n\n", 1);
 	ft_putstr_fd("Change colors :\n", 1);
-	ft_putstr_fd("Numpad 0 to 4\n", 1);
+	ft_putstr_fd("Numpad 0 to 5\n", 1);
 }
-
-////// TODO //////
-/*
-	-0- Welcome message with commands
-	-1- Graphics Optimization
-		https://mandelbrowser.y0.pl/tutorial/computing.html#coloring
-		https://www.youtube.com/watch?v=EbanExb75mc]
-		-1.1- Change Colors every n times
-
-	-2- Differents Sets
-		-2.3- Nova Fractals sets
-			- https://rotgers.io/posts/nova-fractals/
-		-2.4- Phoenix
-			https://www.jamesh.id.au/fractals/mandel/phoenix
-*/
-/*
-=== Today TODO ===
-
--3- Nova
-*/
 
 int32_t	main(int argc, char *argv[])
 {

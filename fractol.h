@@ -6,7 +6,7 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/13 12:22:49 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/18 11:52:48 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@
 # include <memory.h>
 # include <float.h>
 # include <limits.h>
-# define WIDTH 1200
+# define WIDTH 800
 # define HEIGHT 800
-# define ESCAPE 50
+# define ESCAPE 100
 # define R(a) (a) >> 16
 # define G(a) ((a) >> 8) & 0xFF
 # define B(a) (a) & 0xFF
 # define RGB(a, b, c) ((a) << 16) + ((b) << 8) + (c)
 # define A(a) (a) & 0xFF
 # define RGBA(r, g, b, a) (((r) << 24) + ((g) << 16) + ((b) << 8) + (a))
-
 
 typedef struct s_coord
 {
@@ -42,7 +41,6 @@ typedef struct s_coord
 	double		yi;
 	double		cr;
 	double		ci;
-	double		temp;
 	double		zoom;
 	double		x_shift;
 	double		y_shift;
@@ -69,11 +67,12 @@ void		hook_init(t_data *d);
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
 int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
 double		complex_calcul(char set, t_coord **axis);
+void		ft_abs(t_coord **axis);
 
-uint32_t	glitch_shaders(int startcolor, int endcolor, double len, int pix);
-uint32_t	simple_shaders(double instability);
-uint32_t	mono_shaders(double instability);
-uint32_t	shaders_smooth(int startcolor, int endcolor, double instability);
+uint32_t	simple_shaders0(double instability);
+uint32_t	simple_shaders1(double instability);
+uint32_t	simple_shaders2(double instability);
+uint32_t	shaders_smooth(int startcolor, int endcolor, double instability, int pix);
 uint32_t	smooth_mode1(double instability);
 
 void		rlshift_storage(t_data *d, char key);
