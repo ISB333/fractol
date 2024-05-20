@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:55:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/18 12:06:12 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/20 09:25:38 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	command_set(char *msg)
 	ft_putstr_fd("-2.3- Julia Preset 3 (Type Julia 3)\n", 1);
 	ft_putstr_fd("-2.3- Julia Preset of your choices \
 (Type Julia *complex number*)\n", 1);
-	ft_putstr_fd(" -3-  Burning Ship (Type Burning)\n", 1);
+	ft_putstr_fd(" -3-  Burning Ship\n", 1);
 }
