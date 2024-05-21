@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/21 10:22:37 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:09:29 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ int	julia_init_utils(t_coord **axis, char *argv[])
 	(*axis)->set = 'j';
 	crtemp = ft_atod(argv[2]);
 	citemp = ft_atod(argv[3]);
-	if (crtemp > DBL_MAX || crtemp < DBL_MIN || citemp > DBL_MAX \
-		|| citemp < DBL_MIN)
-		return (ft_putstr_fd("error: value overflow\n", 1), -1);
-	(*axis)->cr = (double)crtemp;
-	(*axis)->ci = (double)citemp;
-	return (0);
+	if ((crtemp > DBL_MIN && crtemp < DBL_MAX) && \
+		(citemp > DBL_MIN && citemp < DBL_MAX))
+	{
+		printf("%Lf\n%Lf\n", crtemp, citemp);
+		(*axis)->cr = (double)crtemp;
+		(*axis)->ci = (double)citemp;
+		return (0);
+	}
+	printf("%Lf\n%Lf\n", crtemp, citemp);
+	return (ft_putstr_fd("error: value overflow\n", 1), -1);
 }
 
 int	julia_init(t_coord **axis, char *argv[])
@@ -70,13 +74,13 @@ int	julia_init(t_coord **axis, char *argv[])
 
 int	init_set(t_coord **axis, char *argv[])
 {
-	if (!ft_strcmp("Mandelbrot", argv[1]) \
-		|| !ft_strcmp("mandelbrot", argv[1]))
+	if ((!ft_strcmp("Mandelbrot", argv[1]) && !argv[2]) \
+		|| (!ft_strcmp("mandelbrot", argv[1]) && !argv[2]))
 		return ((*axis)->set = 'm', 0);
 	else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
 		return (julia_init(axis, argv));
-	else if (!ft_strcmp("Burning", argv[1]) \
-			|| !ft_strcmp("burning", argv[1]))
+	else if ((!ft_strcmp("Burning", argv[1]) && !argv[2]) \
+			|| (!ft_strcmp("burning", argv[1]) && !argv[2]))
 	{
 		(*axis)->cr = 0;
 		(*axis)->ci = 0;

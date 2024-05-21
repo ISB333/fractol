@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/18 10:38:37 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/21 14:02:07 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ long double	ft_atod(char *nptr)
 		if (nptr[i] == '.' || nptr[i] == ',')
 			i++;
 	}
+	if (sign == -1)
+		i--;
 	nbr *= sign;
 	return (divider = pow(10, i - 2), nbr /= divider);
 }
@@ -60,7 +62,8 @@ int	is_nbr(char *str)
 	k = -1;
 	while (str[i])
 		i++;
-	while ((str[++k] >= '0' && str[k] <= '9') || str[k] == '.' || str[k] == ',')
+	while ((str[++k] >= '0' && str[k] <= '9') || str[k] == '.' \
+		|| str[k] == ',' || str[k] == '-')
 		;
 	if (k == i)
 		return (0);
