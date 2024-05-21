@@ -6,7 +6,7 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/05/21 10:40:19 by adesille         ###   ########.fr        #
+#    Updated: 2024/05/21 10:54:47 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,6 @@ SRCS := ./srcs/fractol.c ./srcs/complex.c ./srcs/rendering.c \
 
 OBJDIR := .obj
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
-
-GREEN = \033[0;92m
-CURRENT_DATE := $(shell date +"%Y-%m-%d %H:%M")
 
 ######################## LIBRARY ########################
 
@@ -57,17 +54,12 @@ $(LIBFT):
 clean:
 	rm -rf $(OBJDIR)
 	rm -rf $(LIBMLX)/build
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-git:
-	@git add . > /dev/null 2>&1
-	@git commit -m "$(CURRENT_DATE)" > /dev/null 2>&1
-	@git push > /dev/null 2>&1
-	@echo "$(GREEN)┌(メ▼▼)┘ GIT UPDATE └(▼▼メ)┐ $(DEF_COLOR)"
-
-.PHONY: all clean fclean re git libmlx
+.PHONY: all clean fclean re libmlx
