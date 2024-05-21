@@ -6,11 +6,22 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:55:30 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/20 09:25:38 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:29:54 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+uint32_t	convert_rgba(uint8_t values[4])
+{
+	return (((values[0]) << 24) + ((values[1]) << 16) + ((values[2]) << 8) \
+		+ (values[3]));
+}
+
+int	convert_rgb(int values[3])
+{
+	return (((values[0]) << 16) + ((values[1]) << 8) + (values[2]));
+}
 
 int	ff(t_data *d, t_coord *axis, int status)
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+         #
+#    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/04/21 08:31:59by isb3             ###   ########.fr        #
+#    Updated: 2024/05/21 10:40:19 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = fractol
 HEADERS = -I. -I$(LIBMLX)/include -I./libft
-CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3
+CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3 
 CC = cc
 
 ######################## SOURCES ########################
@@ -55,7 +55,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	rm -rf $(OBJDIR) $(DEPFILES)
+	rm -rf $(OBJDIR)
 	rm -rf $(LIBMLX)/build
 	$(MAKE) -C $(LIBFT_DIR) fclean
 

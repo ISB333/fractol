@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/18 12:16:06 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/21 10:22:37 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	julia_init(t_coord **axis, char *argv[])
 	}
 	else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
 		return (julia_init_utils(axis, argv));
+	else
+		return (-1);
 	return (0);
 }
 
@@ -91,7 +93,7 @@ t_coord	*parse_coord(t_coord **axis, char *argv[])
 		if (init_set(axis, argv))
 			return (NULL);
 		(*axis)->zoom = 1;
-		(*axis)->colormode = 5;
+		(*axis)->colormode = 1;
 	}
 	return (*axis);
 }
