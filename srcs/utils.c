@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/21 14:02:07 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:51:16 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ void	ft_abs(t_coord **axis)
 		(*axis)->ci *= -1;
 }
 
-long double	ft_atod(char *nptr)
+long double	ft_atod(char *nptr, int i)
 {
 	long double	nbr;
-	int			i;
 	int			sign;
-	int			divider;
+	long long	divider;
 
 	sign = 1;
-	i = 0;
 	nbr = 0;
 	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;

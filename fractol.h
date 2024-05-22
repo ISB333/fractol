@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/21 10:31:07 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:18:11 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <limits.h>
 # define WIDTH 800
 # define HEIGHT 800
-# define ESCAPE 100
+# define ESCAPE 50
 
 typedef struct s_coord
 {
@@ -55,7 +55,7 @@ t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
 int			init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
-long double	ft_atod(char *nptr);
+long double	ft_atod(char *nptr, int i);
 void		hook_init(t_data *d);
 
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);

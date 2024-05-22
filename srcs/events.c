@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:01 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/18 11:42:10 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/22 10:13:27 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	change_fractal(t_data **d, keys_t key)
 		init_set(&(*d)->axis, (char *[3]){"a", "Mandelbrot"});
 	if (key == 66)
 		init_set(&(*d)->axis, (char *[3]){"b", "Burning"});
+	(*d)->axis->zoom = 1;
 	put_pxl((*d)->image, &(*d)->axis, (*d)->axis->zoom);
 }
 

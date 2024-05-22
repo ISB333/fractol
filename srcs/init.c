@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/21 14:09:29 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:18:26 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,10 @@ t_data	*init_img(t_data **d)
 
 int	julia_init_utils(t_coord **axis, char *argv[])
 {
-	long double	crtemp;
-	long double	citemp;
-
 	(*axis)->set = 'j';
-	crtemp = ft_atod(argv[2]);
-	citemp = ft_atod(argv[3]);
-	if ((crtemp > DBL_MIN && crtemp < DBL_MAX) && \
-		(citemp > DBL_MIN && citemp < DBL_MAX))
-	{
-		printf("%Lf\n%Lf\n", crtemp, citemp);
-		(*axis)->cr = (double)crtemp;
-		(*axis)->ci = (double)citemp;
-		return (0);
-	}
-	printf("%Lf\n%Lf\n", crtemp, citemp);
-	return (ft_putstr_fd("error: value overflow\n", 1), -1);
+	(*axis)->cr = ft_atod(argv[2], 0);
+	(*axis)->ci = ft_atod(argv[3], 0);
+	return (0);
 }
 
 int	julia_init(t_coord **axis, char *argv[])
@@ -65,7 +53,7 @@ int	julia_init(t_coord **axis, char *argv[])
 		(*axis)->cr = 0.285;
 		(*axis)->ci = 0.01;
 	}
-	else if (!is_nbr(argv[2]) && !is_nbr(argv[3]))
+	else if (!is_nbr(argv[2]) && !is_nbr(argv[3]) && !argv[4])
 		return (julia_init_utils(axis, argv));
 	else
 		return (-1);

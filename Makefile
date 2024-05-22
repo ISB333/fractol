@@ -6,7 +6,7 @@
 #    By: adesille <adesille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/13 10:16:45 by adesille          #+#    #+#              #
-#    Updated: 2024/05/21 13:53:49 by adesille         ###   ########.fr        #
+#    Updated: 2024/05/22 10:15:45 by adesille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = fractol
 HEADERS = -I. -I$(LIBMLX)/include -I./libft
-CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3 
+CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -ofast -g3
 CC = cc
 
 ######################## SOURCES ########################
