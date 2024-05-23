@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/22 11:18:26 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/23 08:42:14 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ int	init_set(t_coord **axis, char *argv[])
 		return ((*axis)->set = 'm', 0);
 	else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
 		return (julia_init(axis, argv));
-	else if ((!ft_strcmp("Burning", argv[1]) && !argv[2]) \
-			|| (!ft_strcmp("burning", argv[1]) && !argv[2]))
+	else if ((!ft_strcmp("Burning", argv[1]) && !ft_strcmp("Ship", argv[2]) \
+			&& !argv[3]) || (!ft_strcmp("burning", argv[1]) \
+			&& !ft_strcmp("ship", argv[2]) && !argv[3]))
 	{
 		(*axis)->cr = 0;
 		(*axis)->ci = 0;

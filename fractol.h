@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/22 10:18:11 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/23 08:50:56 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <limits.h>
 # define WIDTH 800
 # define HEIGHT 800
-# define ESCAPE 50
+# define ESCAPE 100
 
 typedef struct s_coord
 {
