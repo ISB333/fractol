@@ -6,11 +6,24 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/23 08:55:51 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:50:58 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	is_burning_ship(char *str1, char *str2)
+{
+	if (!ft_strcmp("Burning", str1) && !ft_strcmp("Ship", str2))
+		return (0);
+	if (!ft_strcmp("burning", str1) && !ft_strcmp("Ship", str2))
+		return (0);
+	if (!ft_strcmp("Burning", str1) && !ft_strcmp("ship", str2))
+		return (0);
+	if (!ft_strcmp("burning", str1) && !ft_strcmp("ship", str2))
+		return (0);
+	return (-1);
+}
 
 void	ft_abs(t_coord **axis)
 {
@@ -26,14 +39,20 @@ long double	ft_atod(char *nptr, int i)
 	int			sign;
 	long long	divider;
 
+	int			token;
+
 	sign = 1;
 	nbr = 0;
+	divider = 0;
+	token = 0;
 	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == 43 || nptr[i] == 45)
 	{
 		if (nptr[i] == 45)
 			sign *= -1;
+		if (nptr[i] == 43)
+			token = 1;
 		i++;
 	}
 	while (nptr[i])
@@ -43,9 +62,10 @@ long double	ft_atod(char *nptr, int i)
 		if (nptr[i] == '.' || nptr[i] == ',')
 			i++;
 	}
-	if (sign == -1)
+	if (sign == -1 || token == 1)
 		i--;
 	nbr *= sign;
+	printf("%lld\n", divider);
 	return (divider = pow(10, i - 2), nbr /= divider);
 }
 
@@ -60,8 +80,9 @@ int	is_nbr(char *str)
 	k = -1;
 	while (str[i])
 		i++;
-	while ((str[++k] >= '0' && str[k] <= '9') || str[k] == '.' \
-		|| str[k] == ',' || str[k] == '-')
+	while ((str[++k] >= '0' && str[k] <= '9') || str[k] == '.' || str[k] == ','\
+		|| (str[k] == '-' && (str[k + 1] >= '0' && str[k + 1] <= '9')) || \
+			(str[k] == '+' && (str[k + 1] >= '0' && str[k + 1] <= '9')))
 		;
 	if (k == i)
 		return (0);

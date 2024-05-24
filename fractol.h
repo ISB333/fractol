@@ -6,7 +6,7 @@
 /*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/23 08:50:56 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/24 10:41:58 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <memory.h>
 # include <float.h>
 # include <limits.h>
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 1000
+# define HEIGHT 1000
 # define ESCAPE 100
 
 typedef struct s_coord
@@ -57,6 +57,7 @@ int			init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
 long double	ft_atod(char *nptr, int i);
 void		hook_init(t_data *d);
+int			is_burning_ship(char *str1, char *str2);
 
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
 int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
