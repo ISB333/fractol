@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/24 10:41:58 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/25 08:35:26 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
 int			init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
-long double	ft_atod(char *nptr, int i);
+long double ft_atod(char *nptr, int i, long double nbr, long double decimal);
 void		hook_init(t_data *d);
 int			is_burning_ship(char *str1, char *str2);
+int			is_in_range(char *str);
 
 int			put_pxl(mlx_image_t *image, t_coord **axis, double zoom);
 int			shift_put_pxl(mlx_image_t *image, t_coord **axis);
 double		complex_calcul(char set, t_coord **axis);
-void		ft_abs(t_coord **axis);
 
 uint32_t	simple_shaders0(double instability);
 uint32_t	simple_shaders1(double instability);

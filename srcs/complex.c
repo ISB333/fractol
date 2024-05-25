@@ -6,11 +6,19 @@
 /*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:15:22 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/18 12:14:44 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/25 08:35:21 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	ft_abs(t_coord **axis)
+{
+	if ((*axis)->cr < 0)
+		(*axis)->cr *= -1;
+	if ((*axis)->ci < 0)
+		(*axis)->ci *= -1;
+}
 
 double	burning_ship(double r, t_coord **axis, int it)
 {

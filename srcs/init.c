@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:38:15 by isb3              #+#    #+#             */
-/*   Updated: 2024/05/24 11:38:15 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/25 08:41:15 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,27 @@ t_data	*init_img(t_data **d)
 	return (*d);
 }
 
+// 1e-9 == 0.000000001, so if the difference is larger, there's overflow
 int	julia_init_utils(t_coord **axis, char *argv[])
 {
-	long double crtemp;
-	long double citemp;
+	long double	crtemp;
+	long double	citemp;
 
 	(*axis)->set = 'j';
-	crtemp = ft_atod(argv[2], 0);
-	citemp = ft_atod(argv[3], 0);
+	crtemp = ft_atod(argv[2], 0, 0.0, 0.0);
+	citemp = ft_atod(argv[3], 0, 0.0, 0.0);
 	(*axis)->cr = (double)crtemp;
 	(*axis)->ci = (double)citemp;
-	
-	printf("%lf\n%lf\n", (*axis)->cr, (*axis)->ci);
-	printf("%Lf\n%Lf\n", crtemp, citemp);
-	// if (crtemp > DBL_MAX || crtemp < -DBL_MAX || citemp > DBL_MAX || citemp < -DBL_MAX)
-	// 	return (-1);
-    // Check if the value has changed due to precision loss
-	// if ((*axis)->cr != (double)crtemp || (*axis)->ci != (double)citemp)
-	// 	return (-1);
 	if (isinf(crtemp) || isinf(citemp))
-		return (-1);
-	if (fabsl(crtemp - (*axis)->cr) > 1e-9 || fabsl(citemp - (*axis)->ci) > 1e-9)
-	{
-        printf("Error: Precision loss detected\n");
-        return (-1);
-	}
+		return (ft_putstr_fd("error: value is infinite\n\n", 1), 1);
+	if (fabsl(crtemp - (*axis)->cr) > 1e-9 || \
+		fabsl(citemp - (*axis)->ci) > 1e-9)
+		return (ft_putstr_fd("error: value overflow\n\n", 1), 1);
 	return (0);
 }
 
 int	julia_init(t_coord **axis, char *argv[])
 {
-	(*axis)->set = 'j';
 	if (argv[2] && argv[2][0] == '1' && !argv[2][1])
 	{
 		(*axis)->cr = 0.3;
@@ -74,9 +64,14 @@ int	julia_init(t_coord **axis, char *argv[])
 		(*axis)->ci = 0.01;
 	}
 	else if (!is_nbr(argv[2]) && !is_nbr(argv[3]) && !argv[4])
-		return (julia_init_utils(axis, argv));
+	{
+		if (!is_in_range(argv[2]) && !is_in_range(argv[3]))
+			return (julia_init_utils(axis, argv));
+		ft_putstr_fd("error: presets should be between range -2 to +2\n\n", 1);
+		return (1);
+	}
 	else
-		return (-1);
+		return (1);
 	return (0);
 }
 
@@ -86,7 +81,10 @@ int	init_set(t_coord **axis, char *argv[])
 		|| (!ft_strcmp("mandelbrot", argv[1]) && !argv[2]))
 		return ((*axis)->set = 'm', 0);
 	else if (!ft_strcmp("Julia", argv[1]) || !ft_strcmp("julia", argv[1]))
+	{
+		(*axis)->set = 'j';
 		return (julia_init(axis, argv));
+	}
 	else if ((!ft_strcmp("burning", argv[1]) && !argv[2]) || \
 		(!ft_strcmp("Burning", argv[1]) && !argv[2]) || \
 		(!is_burning_ship(argv[1], argv[2]) && !argv[3]))
@@ -95,7 +93,7 @@ int	init_set(t_coord **axis, char *argv[])
 		(*axis)->ci = 0;
 		return ((*axis)->set = 'b', 0);
 	}
-	return (-1);
+	return (1);
 }
 
 t_coord	*parse_coord(t_coord **axis, char *argv[])

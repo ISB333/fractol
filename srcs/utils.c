@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/24 11:50:58 by adesille         ###   ########.fr       */
+/*   Updated: 2024/05/25 08:35:56 by isb3             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	is_in_range(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (str[i] >= '0' && str[i] <= '2')
+	{
+		if (str[i] == '2' && str[i + 1])
+			return (1);
+		if (str[i + 1] == '.' || str[i + 1] == ',' || !str[i + 1])
+			return (0);
+	}
+	return (1);
+}
 
 int	is_burning_ship(char *str1, char *str2)
 {
@@ -25,48 +42,32 @@ int	is_burning_ship(char *str1, char *str2)
 	return (-1);
 }
 
-void	ft_abs(t_coord **axis)
+long double	ft_atod(char *nptr, int i, long double nbr, long double decimal)
 {
-	if ((*axis)->cr < 0)
-		(*axis)->cr *= -1;
-	if ((*axis)->ci < 0)
-		(*axis)->ci *= -1;
-}
-
-long double	ft_atod(char *nptr, int i)
-{
-	long double	nbr;
+	long long	div;
 	int			sign;
-	long long	divider;
 
-	int			token;
-
+	div = 1;
 	sign = 1;
-	nbr = 0;
-	divider = 0;
-	token = 0;
 	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
-	if (nptr[i] == 43 || nptr[i] == 45)
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		if (nptr[i] == 45)
-			sign *= -1;
-		if (nptr[i] == 43)
-			token = 1;
+		if (nptr[i++] == '-')
+			sign = -1;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+		nbr = (nbr * 10) + (nptr[i++] - '0');
+	if (nptr[i] == '.' || nptr[i] == ',')
+	{
 		i++;
-	}
-	while (nptr[i])
-	{
 		while (nptr[i] >= '0' && nptr[i] <= '9')
-			nbr = (nbr * 10) + ((nptr[i++]) - 48);
-		if (nptr[i] == '.' || nptr[i] == ',')
-			i++;
+		{
+			decimal = (decimal * 10) + (nptr[i++] - '0');
+			div *= 10;
+		}
 	}
-	if (sign == -1 || token == 1)
-		i--;
-	nbr *= sign;
-	printf("%lld\n", divider);
-	return (divider = pow(10, i - 2), nbr /= divider);
+	return ((nbr + (decimal / div)) * sign);
 }
 
 int	is_nbr(char *str)
