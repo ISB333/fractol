@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:33:26 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/25 08:35:26 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/27 09:17:33 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_data		*init_img(t_data **d);
 t_coord		*parse_coord(t_coord **axis, char *argv[]);
 int			init_set(t_coord **axis, char *argv[]);
 int			is_nbr(char *str);
-long double ft_atod(char *nptr, int i, long double nbr, long double decimal);
+long double	ft_atod(char *nptr, int i, long double nbr, long double decimal);
 void		hook_init(t_data *d);
 int			is_burning_ship(char *str1, char *str2);
 int			is_in_range(char *str);

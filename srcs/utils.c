@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isb3 <isb3@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adesille <adesille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:23:08 by adesille          #+#    #+#             */
-/*   Updated: 2024/05/25 08:35:56 by isb3             ###   ########.fr       */
+/*   Updated: 2024/05/27 09:17:12 by adesille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	is_burning_ship(char *str1, char *str2)
 
 long double	ft_atod(char *nptr, int i, long double nbr, long double decimal)
 {
-	long long	div;
-	int			sign;
+	unsigned long long	div ;
+	int					sign;
 
-	div = 1;
+	div = 1.0;
 	sign = 1;
 	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
@@ -64,7 +64,7 @@ long double	ft_atod(char *nptr, int i, long double nbr, long double decimal)
 		while (nptr[i] >= '0' && nptr[i] <= '9')
 		{
 			decimal = (decimal * 10) + (nptr[i++] - '0');
-			div *= 10;
+			div *= 10.0;
 		}
 	}
 	return ((nbr + (decimal / div)) * sign);
